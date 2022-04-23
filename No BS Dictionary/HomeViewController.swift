@@ -37,7 +37,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         title = "Dictionary"
         view.backgroundColor = .white
         
@@ -60,13 +59,7 @@ class HomeViewController: UIViewController {
     }
 }
 
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
+extension HomeViewController:  UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchWords.count
     }
@@ -76,13 +69,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = searchWords[indexPath.row]
         return cell
     }
-    
-    
-    
+}
+
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }
 
 extension HomeViewController: UISearchBarDelegate {
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchWords = searchWords.filter({ $0.lowercased().contains(searchText.lowercased())})
         tableView.reloadData()
