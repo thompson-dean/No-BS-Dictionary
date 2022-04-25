@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2A19EA7927EAF3C800022EFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A19EA7827EAF3C800022EFE /* AppDelegate.swift */; };
-		2A19EA7B27EAF3C800022EFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A19EA7A27EAF3C800022EFE /* SceneDelegate.swift */; };
 		2A19EA8227EAF3C900022EFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A19EA8127EAF3C900022EFE /* Assets.xcassets */; };
 		2A19EA8527EAF3C900022EFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A19EA8327EAF3C900022EFE /* LaunchScreen.storyboard */; };
 		2A19EA8D27EAF70100022EFE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A19EA8C27EAF70100022EFE /* HomeViewController.swift */; };
@@ -23,7 +22,6 @@
 /* Begin PBXFileReference section */
 		2A19EA7527EAF3C800022EFE /* No BS Dictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "No BS Dictionary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A19EA7827EAF3C800022EFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2A19EA7A27EAF3C800022EFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2A19EA8127EAF3C900022EFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A19EA8427EAF3C900022EFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A19EA8627EAF3C900022EFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -67,13 +65,12 @@
 			isa = PBXGroup;
 			children = (
 				2A19EA7827EAF3C800022EFE /* AppDelegate.swift */,
-				2A19EA7A27EAF3C800022EFE /* SceneDelegate.swift */,
 				2A19EA9827EDAC4500022EFE /* Bundle.swift */,
 				2A19EA9027ED9D6C00022EFE /* DataManager.swift */,
 				2A19EA8C27EAF70100022EFE /* HomeViewController.swift */,
-				2A19EA9427ED9D9200022EFE /* WordUnit.swift */,
-				2A19EA9227ED9D7500022EFE /* HomeViewModel.swift */,
 				2A19EA8E27EAF78F00022EFE /* DetailViewController.swift */,
+				2A19EA9227ED9D7500022EFE /* HomeViewModel.swift */,
+				2A19EA9427ED9D9200022EFE /* WordUnit.swift */,
 				2A19EA9627EDAB2500022EFE /* wordlist.txt */,
 				2A19EA8127EAF3C900022EFE /* Assets.xcassets */,
 				2A19EA8327EAF3C900022EFE /* LaunchScreen.storyboard */,
@@ -158,7 +155,6 @@
 				2A19EA9527ED9D9200022EFE /* WordUnit.swift in Sources */,
 				2A19EA9327ED9D7500022EFE /* HomeViewModel.swift in Sources */,
 				2A19EA9127ED9D6C00022EFE /* DataManager.swift in Sources */,
-				2A19EA7B27EAF3C800022EFE /* SceneDelegate.swift in Sources */,
 				2A19EA8D27EAF70100022EFE /* HomeViewController.swift in Sources */,
 				2A19EA8F27EAF78F00022EFE /* DetailViewController.swift in Sources */,
 			);
