@@ -10,18 +10,20 @@ import UIKit
 class DetailViewController: UIViewController {
     
     var wordLabel = UILabel()
+    var description = UILabel()
+    var stackView = UIStackView()
     
-    let word: String
+//    let word: String
     
-    init(word: String) {
-        self.word = word
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    init(word: String) {
+//        self.word = word
+//
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,15 +36,24 @@ class DetailViewController: UIViewController {
     
     private func style() {
         wordLabel.translatesAutoresizingMaskIntoConstraints = false
-        wordLabel.text = word
+        wordLabel.text = "word"
+        
+        description.translatesAutoresizingMaskIntoConstraints = false
+        description.text = "Welcome to detail screen brah"
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 12
     }
     
     private func layout() {
-        view.addSubview(wordLabel)
+        stackView.addArrangedSubview(wordLabel)
+        stackView.addArrangedSubview(description)
+        view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            wordLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            wordLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }

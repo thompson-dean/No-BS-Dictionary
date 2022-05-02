@@ -36,7 +36,7 @@ extension MainViewController {
         
         dictTitle.translatesAutoresizingMaskIntoConstraints = false
         dictTitle.text = "Dictionary"
-        dictTitle.font = UIFont(name: "Charter-Black", size: 32)
+        dictTitle.font = UIFont(name: "Charter-Black", size: 40)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -48,12 +48,12 @@ extension MainViewController {
         
         recentLabel.translatesAutoresizingMaskIntoConstraints = false
         recentLabel.text = "Recent"
-        recentLabel.font = UIFont(name: "Charter-Black", size: 25)
+        recentLabel.font = UIFont(name: "Charter-Black", size: 30)
         
         recentTableView.translatesAutoresizingMaskIntoConstraints = false
         recentTableView.delegate = self
         recentTableView.dataSource = self
-        recentTableView.rowHeight = 25
+        recentTableView.rowHeight = 32
         recentTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         recentTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
@@ -114,7 +114,7 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.font = UIFont(name: "Futura-Medium", size: 14)
+        cell.textLabel?.font = UIFont(name: "Futura-Medium", size: 16)
         cell.textLabel?.alpha = 0.7
         cell.textLabel?.text = savedTerms[indexPath.row]
         return cell
