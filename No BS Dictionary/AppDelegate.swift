@@ -10,7 +10,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    let homeVC = HomeViewController()
+    let homeVC = MainViewController()
 
     var window: UIWindow?
     
