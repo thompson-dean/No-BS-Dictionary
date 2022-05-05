@@ -19,6 +19,7 @@
 		2A19EA9927EDAC4500022EFE /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A19EA9827EDAC4500022EFE /* Bundle.swift */; };
 		2A34CD4E282385AA00FB7B95 /* WordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A34CD4D282385AA00FB7B95 /* WordViewController.swift */; };
 		2A34CD512823948400FB7B95 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A34CD502823948400FB7B95 /* TitleView.swift */; };
+		2A862A322823D104008757B4 /* DefinitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A862A312823D104008757B4 /* DefinitionTableViewCell.swift */; };
 		2AE51DCC281FEDF60082EECD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE51DCB281FEDF60082EECD /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		2A19EA9827EDAC4500022EFE /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		2A34CD4D282385AA00FB7B95 /* WordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewController.swift; sourceTree = "<group>"; };
 		2A34CD502823948400FB7B95 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		2A862A312823D104008757B4 /* DefinitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionTableViewCell.swift; sourceTree = "<group>"; };
 		2AE51DCB281FEDF60082EECD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +79,7 @@
 				2A34CD4D282385AA00FB7B95 /* WordViewController.swift */,
 				2AE51DCB281FEDF60082EECD /* MainViewController.swift */,
 				2A34CD502823948400FB7B95 /* TitleView.swift */,
+				2A862A312823D104008757B4 /* DefinitionTableViewCell.swift */,
 				2A19EA9427ED9D9200022EFE /* WordUnit.swift */,
 				2A19EA9627EDAB2500022EFE /* wordlist.txt */,
 				2A19EA8127EAF3C900022EFE /* Assets.xcassets */,
@@ -172,6 +175,7 @@
 				2A19EA9527ED9D9200022EFE /* WordUnit.swift in Sources */,
 				2A34CD4E282385AA00FB7B95 /* WordViewController.swift in Sources */,
 				2A19EA9327ED9D7500022EFE /* HomeViewModel.swift in Sources */,
+				2A862A322823D104008757B4 /* DefinitionTableViewCell.swift in Sources */,
 				2A19EA9127ED9D6C00022EFE /* DataManager.swift in Sources */,
 				2A19EA8D27EAF70100022EFE /* HomeViewController.swift in Sources */,
 				2A19EA8F27EAF78F00022EFE /* DetailViewController.swift in Sources */,

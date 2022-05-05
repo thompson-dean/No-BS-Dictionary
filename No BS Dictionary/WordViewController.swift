@@ -9,7 +9,22 @@ import UIKit
 
 class WordViewController: UIViewController {
     
-    var synonyms = ["Esoteric", "Free", "Jazz", "Coalesce", "Funk", "..."]
+    var definitions = []
+    
+    var synonyms = [
+        "accomplished",
+        "all right",
+        "decent",
+        "not bad",
+        "satisfactory",
+        "well"
+        ]
+    var antonyms = [
+        "bad",
+        "evil",
+        "bad",
+        "poor"
+        ]
     
     let word = UILabel()
     
@@ -31,11 +46,11 @@ class WordViewController: UIViewController {
     
 
     //synonyms
-    let synonymsTitleView = TitleView(frame: .zero, title: "SYNONYMS", number: 12)
+    let synonymsTitleView = TitleView(frame: .zero, title: "SYNONYMS", number: 6)
     let synonymTableView = UITableView()
     
     //antonyms
-    let antonymsTitleView = TitleView(frame: .zero, title: "ANTONYMS", number: 7)
+    let antonymsTitleView = TitleView(frame: .zero, title: "ANTONYMS", number: 4)
     let antonymsTableView = UITableView()
     
     override func viewDidLoad() {
@@ -94,6 +109,7 @@ extension WordViewController {
         openButton.titleLabel?.font = .preferredFont(forTextStyle: .subheadline)
 
         synonymTableView.translatesAutoresizingMaskIntoConstraints = false
+        synonymTableView.tag = 0
         synonymTableView.delegate = self
         synonymTableView.dataSource = self
         synonymTableView.rowHeight = 23
@@ -101,10 +117,11 @@ extension WordViewController {
         synonymTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         antonymsTableView.translatesAutoresizingMaskIntoConstraints = false
+        antonymsTableView.tag = 1
         antonymsTableView.delegate = self
         antonymsTableView.dataSource = self
         antonymsTableView.rowHeight = 23
-        antonymsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "synonymCell")
+        antonymsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "antonymCell")
         antonymsTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
     
@@ -207,14 +224,27 @@ extension WordViewController: UITableViewDelegate {
 
 extension WordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        synonyms.count
+        if tableView.tag == 0 {
+            return synonyms.count
+        } else {
+            return antonyms.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "synonymCell", for: indexPath)
-        cell.textLabel?.font = .preferredFont(forTextStyle: .subheadline)
-        cell.textLabel?.text = synonyms[indexPath.row]
-        return cell
+        if tableView.tag == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "synonymCell", for: indexPath)
+            cell.textLabel?.font = .preferredFont(forTextStyle: .subheadline)
+            cell.textLabel?.text = synonyms[indexPath.row]
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "antonymCell", for: indexPath)
+            cell.textLabel?.font = .preferredFont(forTextStyle: .subheadline)
+            cell.textLabel?.text = antonyms[indexPath.row]
+            return cell
+        }
+        
     }
     
 }
