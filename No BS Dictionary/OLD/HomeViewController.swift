@@ -75,10 +75,10 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let word = searchWords[indexPath.row]
+//        let word = searchWords[indexPath.row]
         
-        let vc = DetailViewController(word: word)
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = DetailViewController(word: word)
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

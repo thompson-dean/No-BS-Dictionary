@@ -10,7 +10,7 @@ import UIKit
 class DetailViewController: UIViewController {
     
     var wordLabel = UILabel()
-    var description = UILabel()
+//    var description = UILabel()
     var stackView = UIStackView()
     
 //    let word: String
@@ -38,8 +38,8 @@ class DetailViewController: UIViewController {
         wordLabel.translatesAutoresizingMaskIntoConstraints = false
         wordLabel.text = "word"
         
-        description.translatesAutoresizingMaskIntoConstraints = false
-        description.text = "Welcome to detail screen brah"
+//        description.translatesAutoresizingMaskIntoConstraints = false
+//        description.text = "Welcome to detail screen brah"
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -48,7 +48,7 @@ class DetailViewController: UIViewController {
     
     private func layout() {
         stackView.addArrangedSubview(wordLabel)
-        stackView.addArrangedSubview(description)
+//        stackView.addArrangedSubview(description)
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([

@@ -90,6 +90,7 @@ extension MainViewController {
         ])
     }
 }
+//MARK: - SEARCH DELEGATE
 
 extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -101,12 +102,18 @@ extension MainViewController: UISearchBarDelegate {
     }
 }
 
+//MARK: - TABLEVIEW DELEGATE
+
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let vc = WordViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
+//MARK: - TABLEVIEW DATASOURCE
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         savedTerms.count
@@ -120,6 +127,4 @@ extension MainViewController: UITableViewDataSource {
         return cell
     
     }
-    
-    
 }
