@@ -80,6 +80,7 @@ extension WordViewController {
         partOfSpeechTitle.font = .boldSystemFont(ofSize: 16)
         
         partOfSpeech.translatesAutoresizingMaskIntoConstraints = false
+        partOfSpeech.font = .preferredFont(forTextStyle: .subheadline)
         partOfSpeech.text = "noun"
         
         definitionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -95,14 +96,14 @@ extension WordViewController {
         synonymTableView.translatesAutoresizingMaskIntoConstraints = false
         synonymTableView.delegate = self
         synonymTableView.dataSource = self
-        synonymTableView.rowHeight = 24
+        synonymTableView.rowHeight = 23
         synonymTableView.register(UITableViewCell.self, forCellReuseIdentifier: "synonymCell")
         synonymTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         antonymsTableView.translatesAutoresizingMaskIntoConstraints = false
         antonymsTableView.delegate = self
         antonymsTableView.dataSource = self
-        antonymsTableView.rowHeight = 24
+        antonymsTableView.rowHeight = 23
         antonymsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "synonymCell")
         antonymsTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
@@ -136,7 +137,7 @@ extension WordViewController {
         
         
         NSLayoutConstraint.activate([
-            word.topAnchor.constraint(equalToSystemSpacingBelow: view.topAnchor, multiplier: 10),
+            word.topAnchor.constraint(equalToSystemSpacingBelow: view.topAnchor, multiplier: 12),
             word.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             
             phoneticsStackView.topAnchor.constraint(equalToSystemSpacingBelow: word.bottomAnchor, multiplier: 0),
