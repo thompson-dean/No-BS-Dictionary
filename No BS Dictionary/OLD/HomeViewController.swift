@@ -10,7 +10,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     let dataManager = DataManager()
-    var searchWords = Bundle.main.getTxt()
+    private var searchWords = Bundle.main.getTxt()
     
     lazy var searchController: UISearchController = {
        let searchController = UISearchController()

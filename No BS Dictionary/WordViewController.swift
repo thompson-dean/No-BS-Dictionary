@@ -9,7 +9,7 @@ import UIKit
 
 class WordViewController: UIViewController {
     
-    var definitions = []
+
     
     var synonyms = [
         "accomplished",

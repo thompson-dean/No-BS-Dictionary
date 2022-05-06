@@ -11,6 +11,9 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    private var searchWords = Bundle.main.getTxt()
+    
+    
     var savedTerms = ["Esoteric", "Free", "Jazz", "Coalesce", "Funk"]
     
     let dictTitle = UILabel()
@@ -19,11 +22,11 @@ class MainViewController: UIViewController {
     let recentLabel = UILabel()
     let recentTableView = UITableView()
     
+    var titleBelowSearchBar = "Recent"
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .systemBackground
         
         style()
@@ -47,7 +50,7 @@ extension MainViewController {
         searchBar.delegate = self
         
         recentLabel.translatesAutoresizingMaskIntoConstraints = false
-        recentLabel.text = "Recent"
+        recentLabel.text = titleBelowSearchBar
         recentLabel.font = UIFont(name: "Charter-Black", size: 30)
         
         recentTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -94,7 +97,14 @@ extension MainViewController {
 
 extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
+       
+            searchWords = Bundle.main.getTxt()
+            searchWords = searchWords.filter({ $0.lowercased().contains(searchText.lowercased())})
+            DispatchQueue.main.async {
+                self.recentTableView.reloadData()
+        }
+        
+        
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -116,14 +126,14 @@ extension MainViewController: UITableViewDelegate {
 //MARK: - TABLEVIEW DATASOURCE
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        savedTerms.count
+        searchWords.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.font = UIFont(name: "Futura-Medium", size: 16)
         cell.textLabel?.alpha = 0.7
-        cell.textLabel?.text = savedTerms[indexPath.row]
+        cell.textLabel?.text = searchWords[indexPath.row]
         return cell
     
     }
