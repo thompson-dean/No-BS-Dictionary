@@ -11,13 +11,13 @@ import UIKit
 class DefinitionTableViewCell: UITableViewCell {
     static let reuseID = "DefinitionTableViewCell"
     
-    let partOfSpeechStackView = UIStackView()
-    let partOfSpeechTitle = TitleView(frame: .zero, title: "DEFINITION", number: 5)
-    let partOfSpeech = UILabel()
+    lazy var partOfSpeechStackView = UIStackView()
+    lazy var partOfSpeechTitle = TitleView(frame: .zero, title: "PART OF SPEECH", number: 0)
+    lazy var partOfSpeechLabel = UILabel()
     
-    let definitionTitleView = TitleView(frame: .zero, title: "DEFINITION", number: 5)
-    let definitionLabel = UILabel()
-    let openButton = UIButton()
+    lazy var definitionTitleView = TitleView(frame: .zero, title: "DEFINITION", number: 5)
+    lazy var definitionLabel = UILabel()
+    lazy var openButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,19 +35,17 @@ class DefinitionTableViewCell: UITableViewCell {
         partOfSpeechStackView.axis = .vertical
         partOfSpeechStackView.spacing = 2
         
-        partOfSpeech.translatesAutoresizingMaskIntoConstraints = false
-        partOfSpeech.font = .preferredFont(forTextStyle: .subheadline)
-        partOfSpeech.text = "noun"
+        partOfSpeechLabel.translatesAutoresizingMaskIntoConstraints = false
+        partOfSpeechLabel.font = .preferredFont(forTextStyle: .subheadline)
         
         definitionLabel.translatesAutoresizingMaskIntoConstraints = false
-        definitionLabel.text = "1. A musical art form rooted in West African cultural and musical expression and in the African American blues tradition, with diverse influences over time, commonly characterized by blue notes, syncopation, swing, call and response, polyrhythms and improvisation."
         definitionLabel.numberOfLines = 0
         definitionLabel.font = .preferredFont(forTextStyle: .subheadline)
     }
     
     private func layout() {
         partOfSpeechStackView.addArrangedSubview(partOfSpeechTitle)
-        partOfSpeechStackView.addArrangedSubview(partOfSpeech)
+        partOfSpeechStackView.addArrangedSubview(partOfSpeechLabel)
         contentView.addSubview(partOfSpeechStackView)
         contentView.addSubview(definitionTitleView)
         contentView.addSubview(definitionLabel)
@@ -62,9 +60,14 @@ class DefinitionTableViewCell: UITableViewCell {
             trailingAnchor.constraint(equalToSystemSpacingAfter: definitionTitleView.trailingAnchor, multiplier: 2),
             
             definitionLabel.topAnchor.constraint(equalToSystemSpacingBelow: definitionTitleView.bottomAnchor, multiplier: 1),
-            definitionLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 3),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: definitionLabel.trailingAnchor, multiplier: 3)
+            definitionLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 4),
+            trailingAnchor.constraint(equalToSystemSpacingAfter: definitionLabel.trailingAnchor, multiplier: 4)
         ])
+    }
+    
+    func configure(partOfSpeech: String, definition: String) {
+        partOfSpeechLabel.text = partOfSpeech
+        definitionLabel.text = definition
     }
     
     

@@ -34,15 +34,7 @@ class WordViewController: UIViewController {
     let speakerImage = UIImageView()
     let emptyView = UIView()
     
-    //Parts of Speech
-    let partOfSpeechStackView = UIStackView()
-    let partOfSpeechTitle = UILabel()
-    let partOfSpeech = UILabel()
-    
-    //Definitions
-    let definitionTitleView = TitleView(frame: .zero, title: "DEFINITION", number: 5)
-    let definitionLabel = UILabel()
-    let openButton = UIButton()
+    let definitionTableView = UITableView()
     
     //synonyms
     let synonymsTitleView = TitleView(frame: .zero, title: "SYNONYMS", number: 6)
@@ -87,27 +79,13 @@ extension WordViewController {
         // using this view as a spacer fo the stackview
         emptyView.translatesAutoresizingMaskIntoConstraints = false
         
-        partOfSpeechStackView.translatesAutoresizingMaskIntoConstraints = false
-        partOfSpeechStackView.axis = .vertical
-        partOfSpeechStackView.spacing = 2
-        
-        partOfSpeechTitle.translatesAutoresizingMaskIntoConstraints = false
-        partOfSpeechTitle.text = "PART OF SPEECH"
-        partOfSpeechTitle.font = .boldSystemFont(ofSize: 16)
-        
-        partOfSpeech.translatesAutoresizingMaskIntoConstraints = false
-        partOfSpeech.font = .preferredFont(forTextStyle: .subheadline)
-        partOfSpeech.text = "noun"
-        
-        definitionLabel.translatesAutoresizingMaskIntoConstraints = false
-        definitionLabel.attributedText = attributedText(withString: " A musical art form rooted in West African cultural and musical expression and in the African American blues tradition, with diverse influences over time, commonly characterized by blue notes, syncopation, swing, call and response, polyrhythms and improvisation.", boldString: "1.")
-        definitionLabel.numberOfLines = 0
-        definitionLabel.font = .preferredFont(forTextStyle: .subheadline)
-        
-        openButton.translatesAutoresizingMaskIntoConstraints = false
-        openButton.setTitle("more..", for: [])
-        openButton.setTitleColor(.systemBlue, for: [])
-        openButton.titleLabel?.font = .preferredFont(forTextStyle: .subheadline)
+        definitionTableView.translatesAutoresizingMaskIntoConstraints = false
+        definitionTableView.register(DefinitionTableViewCell.self, forCellReuseIdentifier: DefinitionTableViewCell.reuseID)
+        definitionTableView.tag = 2
+        definitionTableView.delegate = self
+        definitionTableView.dataSource = self
+        definitionTableView.rowHeight = 150
+        definitionTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
 
         synonymTableView.translatesAutoresizingMaskIntoConstraints = false
         synonymTableView.tag = 0
@@ -136,16 +114,8 @@ extension WordViewController {
         phoneticsStackView.addArrangedSubview(speakerImage)
         phoneticsStackView.addArrangedSubview(emptyView)
         view.addSubview(phoneticsStackView)
-        
-        partOfSpeechStackView.addArrangedSubview(partOfSpeechTitle)
-        partOfSpeechStackView.addArrangedSubview(partOfSpeech)
-        view.addSubview(partOfSpeechStackView)
-        
-        view.addSubview(definitionTitleView)
     
-        view.addSubview(definitionLabel)
-        
-        view.addSubview(openButton)
+        view.addSubview(definitionTableView)
     
         view.addSubview(synonymsTitleView)
         view.addSubview(synonymTableView)
@@ -162,22 +132,12 @@ extension WordViewController {
             phoneticsStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: phoneticsStackView.trailingAnchor, multiplier: 2),
             
-            partOfSpeechStackView.topAnchor.constraint(equalToSystemSpacingBelow: phoneticsStackView.bottomAnchor, multiplier: 3),
-            partOfSpeechStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: partOfSpeechStackView.trailingAnchor, multiplier: 2),
+            definitionTableView.topAnchor.constraint(equalToSystemSpacingBelow: phoneticsStackView.bottomAnchor, multiplier: 0),
+            definitionTableView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 0),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: definitionTableView.trailingAnchor, multiplier: 0),
+            definitionTableView.heightAnchor.constraint(equalToConstant: 250),
             
-            definitionTitleView.topAnchor.constraint(equalToSystemSpacingBelow: partOfSpeechStackView.bottomAnchor, multiplier: 3),
-            definitionTitleView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: definitionTitleView.trailingAnchor, multiplier: 2),
-            
-            definitionLabel.topAnchor.constraint(equalToSystemSpacingBelow: definitionTitleView.bottomAnchor, multiplier: 1),
-            definitionLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 3),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: definitionLabel.trailingAnchor, multiplier: 3),
-            
-            openButton.topAnchor.constraint(equalToSystemSpacingBelow: definitionLabel.bottomAnchor, multiplier: 0),
-            openButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 3),
-            
-            synonymsTitleView.topAnchor.constraint(equalToSystemSpacingBelow: openButton.bottomAnchor, multiplier: 2),
+            synonymsTitleView.topAnchor.constraint(equalToSystemSpacingBelow: definitionTableView.bottomAnchor, multiplier: 2),
             synonymsTitleView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             
             synonymTableView.topAnchor.constraint(equalToSystemSpacingBelow: synonymsTitleView.bottomAnchor, multiplier: 1),
@@ -185,7 +145,7 @@ extension WordViewController {
             synonymTableView.widthAnchor.constraint(equalToConstant: 150),
             view.bottomAnchor.constraint(equalToSystemSpacingBelow: synonymTableView.bottomAnchor, multiplier: 2),
             
-            antonymsTitleView.topAnchor.constraint(equalToSystemSpacingBelow: openButton.bottomAnchor, multiplier: 2),
+            antonymsTitleView.topAnchor.constraint(equalToSystemSpacingBelow: definitionTableView.bottomAnchor, multiplier: 2),
             antonymsTitleView.leadingAnchor.constraint(equalToSystemSpacingAfter: synonymTableView.trailingAnchor, multiplier: 4),
             
             antonymsTableView.topAnchor.constraint(equalToSystemSpacingBelow: antonymsTitleView.bottomAnchor, multiplier: 1),
@@ -224,11 +184,13 @@ extension WordViewController: UITableViewDelegate {
             let vc = WordViewController()
             vc.word.text = synonyms[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
-        } else {
+        } else if tableView.tag == 1 {
             let vc = WordViewController()
             vc.word.text = antonyms[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
             antonymsTableView.deselectRow(at: indexPath, animated: true)
+        } else {
+            definitionTableView.deselectRow(at: indexPath, animated: false)
         }
         
     }
@@ -238,8 +200,10 @@ extension WordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 0 {
             return synonyms.count
-        } else {
+        } else if tableView.tag == 1 {
             return antonyms.count
+        } else {
+            return fakeData[0].meanings.count
         }
         
     }
@@ -250,10 +214,14 @@ extension WordViewController: UITableViewDataSource {
             cell.textLabel?.font = .preferredFont(forTextStyle: .subheadline)
             cell.textLabel?.text = synonyms[indexPath.row]
             return cell
-        } else {
+        } else if tableView.tag == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "antonymCell", for: indexPath)
             cell.textLabel?.font = .preferredFont(forTextStyle: .subheadline)
             cell.textLabel?.text = antonyms[indexPath.row]
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: DefinitionTableViewCell.reuseID, for: indexPath) as! DefinitionTableViewCell
+            cell.configure(partOfSpeech: fakeData[0].meanings[indexPath.row].partOfSpeech, definition: fakeData[0].meanings[indexPath.row].definitions[0].definition)
             return cell
         }
         
