@@ -12,10 +12,8 @@ import UIKit
 class MainViewController: UIViewController {
 
     
-    private var searchWords = Bundle.main.getTxt()
-    
-    
-    var savedTerms = ["esoteric", "free", "jazz", "coalesce", "funk"]
+    private var searchWords = [String]()
+    var savedTerms = [String]()
     
     let dictTitle = UILabel()
     let stackView = UIStackView()
@@ -28,10 +26,12 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
-        
-        
         style()
         layout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.recentTableView.reloadData()
     }
 }
 
@@ -87,10 +87,6 @@ extension MainViewController {
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: recentTableView.trailingAnchor, multiplier: 1),
             view.bottomAnchor.constraint(equalToSystemSpacingBelow: recentTableView.bottomAnchor, multiplier: 2)
             
-            
-            
-            
-            
         ])
     }
 }
@@ -127,7 +123,8 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        print(searchWords[indexPath.row])
+        savedTerms.append(searchWords[indexPath.row])
+        
         let vc = WordViewController()
         vc.word.text = searchWords[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
