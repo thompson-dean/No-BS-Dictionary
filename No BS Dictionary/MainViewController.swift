@@ -10,24 +10,25 @@ import UIKit
 import UIKit
 
 class MainViewController: UIViewController {
+
     
     private var searchWords = Bundle.main.getTxt()
     
     
-    var savedTerms = ["Esoteric", "Free", "Jazz", "Coalesce", "Funk"]
+    var savedTerms = ["esoteric", "free", "jazz", "coalesce", "funk"]
     
     let dictTitle = UILabel()
     let stackView = UIStackView()
     let searchBar = UISearchBar(frame: .zero)
     let recentLabel = UILabel()
     let recentTableView = UITableView()
-    
-    var titleBelowSearchBar = "Recent"
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
+        
         
         style()
         layout()
@@ -50,7 +51,7 @@ extension MainViewController {
         searchBar.delegate = self
         
         recentLabel.translatesAutoresizingMaskIntoConstraints = false
-        recentLabel.text = titleBelowSearchBar
+        recentLabel.text = "Recent"
         recentLabel.font = UIFont(name: "Charter-Black", size: 30)
         
         recentTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -97,18 +98,26 @@ extension MainViewController {
 
 extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-       
+        if searchText.isEmpty {
+            searchWords = savedTerms
+            DispatchQueue.main.async {
+                self.recentLabel.text = "Recent"
+                self.recentTableView.reloadData()
+            }
+        } else {
+           
             searchWords = Bundle.main.getTxt()
             searchWords = searchWords.filter({ $0.lowercased().contains(searchText.lowercased())})
             DispatchQueue.main.async {
+                self.recentLabel.text = "Suggestions"
                 self.recentTableView.reloadData()
+            }
         }
-        
         
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("Tapped")
+        self.searchBar.endEditing(true)
     }
 }
 
@@ -118,7 +127,9 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        print(searchWords[indexPath.row])
         let vc = WordViewController()
+        vc.word.text = searchWords[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

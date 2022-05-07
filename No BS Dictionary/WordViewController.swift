@@ -8,8 +8,8 @@
 import UIKit
 
 class WordViewController: UIViewController {
-    
 
+    let dataManager = DataManager()
     
     var synonyms = [
         "accomplished",
@@ -44,7 +44,6 @@ class WordViewController: UIViewController {
     let definitionLabel = UILabel()
     let openButton = UIButton()
     
-
     //synonyms
     let synonymsTitleView = TitleView(frame: .zero, title: "SYNONYMS", number: 6)
     let synonymTableView = UITableView()
@@ -55,9 +54,12 @@ class WordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        dataManager.fetch(searchWord: "jazz") { result in
+            DispatchQueue.main.async {
+                self.word.text = result[0].word
+            }
+        }
         view.backgroundColor = .systemBackground
-        
         style()
         layout()
     }
@@ -67,7 +69,6 @@ extension WordViewController {
     private func style() {
         
         word.translatesAutoresizingMaskIntoConstraints = false
-        word.text = "Jazz"
         word.font = UIFont(name: "Charter-Black", size: 40)
         
         phoneticsStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -157,7 +158,7 @@ extension WordViewController {
             word.topAnchor.constraint(equalToSystemSpacingBelow: view.topAnchor, multiplier: 12),
             word.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             
-            phoneticsStackView.topAnchor.constraint(equalToSystemSpacingBelow: word.bottomAnchor, multiplier: 0),
+            phoneticsStackView.topAnchor.constraint(equalToSystemSpacingBelow: word.bottomAnchor, multiplier: 1),
             phoneticsStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: phoneticsStackView.trailingAnchor, multiplier: 2),
             
@@ -217,8 +218,19 @@ extension WordViewController {
 }
 
 extension WordViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.tag == 0 {
+            synonymTableView.deselectRow(at: indexPath, animated: true)
+            let vc = WordViewController()
+            vc.word.text = synonyms[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = WordViewController()
+            vc.word.text = antonyms[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
+            antonymsTableView.deselectRow(at: indexPath, animated: true)
+        }
+        
     }
 }
 

@@ -13,9 +13,10 @@ class DataManager {
     
     func fetch(searchWord: String, completion: @escaping ([WordUnit]) -> Void) {
         
-        let api = "https://api.dictionaryapi.dev/api/v2/entries/en/hello"
+        let api = "https://api.dictionaryapi.dev/api/v2/entries/en/"
         
         guard let url = URL(string: "\(api)\(searchWord)") else { return }
+        print(url)
         
         dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
