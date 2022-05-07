@@ -7,8 +7,6 @@
 
 import UIKit
 
-import UIKit
-
 class MainViewController: UIViewController {
 
     
@@ -124,9 +122,9 @@ extension MainViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         savedTerms.append(searchWords[indexPath.row])
-        
+    
         let vc = WordViewController()
-        vc.word.text = searchWords[indexPath.row]
+        vc.chosenWord = searchWords[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

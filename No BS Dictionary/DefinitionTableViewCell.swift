@@ -33,7 +33,7 @@ class DefinitionTableViewCell: UITableViewCell {
     private func styling() {
         partOfSpeechStackView.translatesAutoresizingMaskIntoConstraints = false
         partOfSpeechStackView.axis = .vertical
-        partOfSpeechStackView.spacing = 2
+        partOfSpeechStackView.spacing = 8
         
         partOfSpeechLabel.translatesAutoresizingMaskIntoConstraints = false
         partOfSpeechLabel.font = .preferredFont(forTextStyle: .subheadline)
@@ -60,8 +60,8 @@ class DefinitionTableViewCell: UITableViewCell {
             trailingAnchor.constraint(equalToSystemSpacingAfter: definitionTitleView.trailingAnchor, multiplier: 2),
             
             definitionLabel.topAnchor.constraint(equalToSystemSpacingBelow: definitionTitleView.bottomAnchor, multiplier: 1),
-            definitionLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 4),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: definitionLabel.trailingAnchor, multiplier: 4)
+            definitionLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 2),
+            trailingAnchor.constraint(equalToSystemSpacingAfter: definitionLabel.trailingAnchor, multiplier: 2)
         ])
     }
     
