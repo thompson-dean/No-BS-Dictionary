@@ -10,17 +10,17 @@ import UIKit
 class TitleView: UIView {
     
     let title: String
-    let number: Int
+//    let number: Int
     
     let stackView = UIStackView()
     let titleLabel = UILabel()
-    let numberLabel = UILabel()
+//    let numberLabel = UILabel()
     let emptyView = UIView()
     
-    init(frame: CGRect, title: String, number: Int) {
+    init(frame: CGRect, title: String) {
         
         self.title = title
-        self.number = number
+//        self.number = number
         
         super.init(frame: frame)
   
@@ -48,11 +48,10 @@ extension TitleView {
         titleLabel.font = .boldSystemFont(ofSize: 16)
         
         
-        
-        numberLabel.translatesAutoresizingMaskIntoConstraints = false
-        numberLabel.text = "\(number)"
-        numberLabel.font = .boldSystemFont(ofSize: 16)
-        numberLabel.textColor = .darkGray
+//        numberLabel.translatesAutoresizingMaskIntoConstraints = false
+//        numberLabel.text = "\(number)"
+//        numberLabel.font = .boldSystemFont(ofSize: 16)
+//        numberLabel.textColor = .darkGray
         
         emptyView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -60,7 +59,7 @@ extension TitleView {
     
     private func layout() {
         stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(numberLabel)
+//        stackView.addArrangedSubview(numberLabel)
         stackView.addArrangedSubview(emptyView)
         addSubview(stackView)
         

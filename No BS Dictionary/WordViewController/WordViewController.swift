@@ -18,6 +18,8 @@ class WordViewController: UIViewController {
     struct ViewModel {
         let wordUnit: String
         let phoneticUnits: [String]
+        let synonyms: [String]
+        let antonyms: [String]
         
     }
     
@@ -33,33 +35,29 @@ class WordViewController: UIViewController {
     let definitionTableView = UITableView()
     
     //synonyms
-    let synonymsTitleView = TitleView(frame: .zero, title: "SYNONYMS", number: 3)
+    let synonymStackView = UIStackView()
+    let synonymTitleLabel = UILabel()
+    var synonymNumberLabel = UILabel()
+    let synonymEmptyView = UIView()
+    
     let synonymTableView = UITableView()
     
     //antonyms
-    let antonymsTitleView = TitleView(frame: .zero, title: "ANTONYMS", number: 4)
+    
+    let antonymStackView = UIStackView()
+    let antonymTitleLabel = UILabel()
+    var antonymNumberLabel = UILabel()
+    let antonymEmptyView = UIView()
+    
     let antonymsTableView = UITableView()
     
-//    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, chosenWord: String) {
-//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-//
-//        self.chosenWord = chosenWord
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+ 
         view.backgroundColor = .systemBackground
         style()
         layout()
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -97,6 +95,22 @@ extension WordViewController {
         definitionTableView.dataSource = self
         definitionTableView.rowHeight = 150
         definitionTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        
+        synonymStackView.translatesAutoresizingMaskIntoConstraints = false
+        synonymStackView.axis = .horizontal
+        synonymStackView.spacing = 6
+        synonymStackView.alignment = .center
+        
+        synonymTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        synonymTitleLabel.text = "SYNONYM"
+        synonymTitleLabel.font = .boldSystemFont(ofSize: 16)
+        
+        synonymNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+        synonymNumberLabel.text = "6"
+        synonymNumberLabel.font = .boldSystemFont(ofSize: 16)
+        synonymNumberLabel.textColor = .darkGray
+        
+        synonymEmptyView.translatesAutoresizingMaskIntoConstraints = false
 
         synonymTableView.translatesAutoresizingMaskIntoConstraints = false
         synonymTableView.tag = 0
@@ -105,6 +119,22 @@ extension WordViewController {
         synonymTableView.rowHeight = 23
         synonymTableView.register(UITableViewCell.self, forCellReuseIdentifier: "synonymCell")
         synonymTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        
+        antonymStackView.translatesAutoresizingMaskIntoConstraints = false
+        antonymStackView.axis = .horizontal
+        antonymStackView.spacing = 6
+        antonymStackView.alignment = .center
+        
+        antonymTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        antonymTitleLabel.text = "ANTONYM"
+        antonymTitleLabel.font = .boldSystemFont(ofSize: 16)
+        
+        antonymNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+        antonymNumberLabel.text = "6"
+        antonymNumberLabel.font = .boldSystemFont(ofSize: 16)
+        antonymNumberLabel.textColor = .darkGray
+        
+        antonymEmptyView.translatesAutoresizingMaskIntoConstraints = false
         
         antonymsTableView.translatesAutoresizingMaskIntoConstraints = false
         antonymsTableView.tag = 1
@@ -128,10 +158,16 @@ extension WordViewController {
     
         view.addSubview(definitionTableView)
     
-        view.addSubview(synonymsTitleView)
+        synonymStackView.addArrangedSubview(synonymTitleLabel)
+        synonymStackView.addArrangedSubview(synonymNumberLabel)
+        synonymStackView.addArrangedSubview(synonymEmptyView)
+        view.addSubview(synonymStackView)
         view.addSubview(synonymTableView)
         
-        view.addSubview(antonymsTitleView)
+        antonymStackView.addArrangedSubview(antonymTitleLabel)
+        antonymStackView.addArrangedSubview(antonymNumberLabel)
+        antonymStackView.addArrangedSubview(antonymEmptyView)
+        view.addSubview(antonymStackView)
         view.addSubview(antonymsTableView)
         
         NSLayoutConstraint.activate([
@@ -147,18 +183,18 @@ extension WordViewController {
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: definitionTableView.trailingAnchor, multiplier: 0),
             definitionTableView.heightAnchor.constraint(equalToConstant: 250),
             
-            synonymsTitleView.topAnchor.constraint(equalToSystemSpacingBelow: definitionTableView.bottomAnchor, multiplier: 2),
-            synonymsTitleView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            synonymStackView.topAnchor.constraint(equalToSystemSpacingBelow: definitionTableView.bottomAnchor, multiplier: 2),
+            synonymStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             
-            synonymTableView.topAnchor.constraint(equalToSystemSpacingBelow: synonymsTitleView.bottomAnchor, multiplier: 1),
+            synonymTableView.topAnchor.constraint(equalToSystemSpacingBelow: synonymStackView.bottomAnchor, multiplier: 1),
             synonymTableView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 0),
             synonymTableView.widthAnchor.constraint(equalToConstant: 150),
             view.bottomAnchor.constraint(equalToSystemSpacingBelow: synonymTableView.bottomAnchor, multiplier: 2),
             
-            antonymsTitleView.topAnchor.constraint(equalToSystemSpacingBelow: definitionTableView.bottomAnchor, multiplier: 2),
-            antonymsTitleView.leadingAnchor.constraint(equalToSystemSpacingAfter: synonymTableView.trailingAnchor, multiplier: 6),
+            antonymStackView.topAnchor.constraint(equalToSystemSpacingBelow: definitionTableView.bottomAnchor, multiplier: 2),
+            antonymStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: synonymTableView.trailingAnchor, multiplier: 6),
             
-            antonymsTableView.topAnchor.constraint(equalToSystemSpacingBelow: antonymsTitleView.bottomAnchor, multiplier: 1),
+            antonymsTableView.topAnchor.constraint(equalToSystemSpacingBelow: antonymStackView.bottomAnchor, multiplier: 1),
             antonymsTableView.leadingAnchor.constraint(equalToSystemSpacingAfter: synonymTableView.trailingAnchor, multiplier: 4),
             antonymsTableView.widthAnchor.constraint(equalToConstant: 150),
             view.bottomAnchor.constraint(equalToSystemSpacingBelow: antonymsTableView.bottomAnchor, multiplier: 2)
@@ -257,7 +293,8 @@ extension WordViewController {
                 self.word.text = wordUnits[0].word
                 self.synonyms = wordUnits[0].meanings[0].synonyms
                 self.antonyms = wordUnits[0].meanings[0].antonyms
-                
+                self.antonymNumberLabel.text = "\(wordUnits[0].meanings[0].antonyms.count)"
+                self.synonymNumberLabel.text = "\(wordUnits[0].meanings[0].synonyms.count)"
                 
                 
                 

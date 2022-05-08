@@ -9,13 +9,19 @@ import Foundation
 import UIKit
 
 class DefinitionTableViewCell: UITableViewCell {
+    
+    struct ViewModel {
+        let partOfSpeech: String
+        let definition: String
+    }
+    
     static let reuseID = "DefinitionTableViewCell"
     
     lazy var partOfSpeechStackView = UIStackView()
-    lazy var partOfSpeechTitle = TitleView(frame: .zero, title: "PART OF SPEECH", number: 0)
+    lazy var partOfSpeechTitle = TitleView(frame: .zero, title: "PART OF SPEECH")
     lazy var partOfSpeechLabel = UILabel()
     
-    lazy var definitionTitleView = TitleView(frame: .zero, title: "DEFINITION", number: 5)
+    lazy var definitionTitleView = TitleView(frame: .zero, title: "DEFINITION")
     lazy var definitionLabel = UILabel()
     lazy var openButton = UIButton()
     
