@@ -126,7 +126,7 @@ extension WordViewController {
 
 extension WordViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        meaningTableView.deselectRow(at: indexPath, animated: true)
         
     }
 }

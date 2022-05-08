@@ -18,10 +18,10 @@ class DefinitionTableViewCell: UITableViewCell {
     static let reuseID = "DefinitionTableViewCell"
     
     lazy var partOfSpeechStackView = UIStackView()
-    lazy var partOfSpeechTitle = TitleView(frame: .zero, title: "PART OF SPEECH")
+    lazy var partOfSpeechTitle = UILabel()
     lazy var partOfSpeechLabel = UILabel()
     
-    lazy var definitionTitleView = TitleView(frame: .zero, title: "DEFINITION")
+    lazy var definitionTitleView = UILabel()
     lazy var definitionLabel = UILabel()
     lazy var openButton = UIButton()
     
