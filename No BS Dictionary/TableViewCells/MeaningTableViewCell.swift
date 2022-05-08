@@ -12,6 +12,12 @@ class MeaningTableViewCell: UITableViewCell {
     
     static let reuseID = "MeaningTableViewCell"
     
+    //Add part Of Speech Labels etc.
+    
+    let defintionStackView = UIStackView()
+    let definitionsLabel = UILabel()
+    let definitionsNumber = UILabel()
+    
     let definitionTableView = UITableView()
     
     //synonyms
@@ -108,6 +114,11 @@ class MeaningTableViewCell: UITableViewCell {
         antonymStackView.addArrangedSubview(antonymEmptyView)
         contentView.addSubview(antonymStackView)
         contentView.addSubview(antonymsTableView)
+        
+        
+        NSLayoutConstraint.activate([
+        
+        ])
     }
 }
 
