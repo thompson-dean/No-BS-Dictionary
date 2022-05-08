@@ -36,46 +36,6 @@ struct Definition: Codable {
 
 var fakeData = [
     WordUnit(
-        word: "hello",
-        phonetics: [
-            Phonetic(
-                text: "/həˈləʊ/",
-                audio: "//ssl.gstatic.com/dictionary/static/sounds/20200429/hello--_gb_1.mp3")],
-        meanings: [
-            Meaning(
-                partOfSpeech: "exclamation",
-                definitions: [
-                    Definition(
-                        definition: "used as a greeting or to begin a phone conversation.",
-                        example: "hello there, Katie!")
-                    ],
-                synonyms:[],
-                antonyms: []
-            ),
-            Meaning(
-                partOfSpeech: "noun",
-                definitions: [
-                    Definition(
-                        definition: "an utterance of ‘hello’; a greeting.",
-                        example: "she was getting polite nods and hellos from people")
-                    ],
-                synonyms:[],
-                antonyms: []
-            ),
-            Meaning(
-                partOfSpeech: "verb",
-                definitions: [
-                    Definition(
-                        definition: "say or shout ‘hello’.",
-                        example: "I pressed the phone button and helloed")
-                    ],
-                synonyms:[],
-                antonyms: []
-            )
-
-        ]
-    ),
-    WordUnit(
         word: "big",
         phonetics: [
             Phonetic(
