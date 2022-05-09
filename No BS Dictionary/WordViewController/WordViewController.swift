@@ -72,7 +72,7 @@ extension WordViewController {
         meaningTableView.register(MeaningTableViewCell.self, forCellReuseIdentifier: MeaningTableViewCell.reuseID)
         meaningTableView.delegate = self
         meaningTableView.dataSource = self
-        meaningTableView.rowHeight = 500
+        meaningTableView.rowHeight = 600
     
     }
     

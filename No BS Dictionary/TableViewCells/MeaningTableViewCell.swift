@@ -10,9 +10,18 @@ import UIKit
 
 class MeaningTableViewCell: UITableViewCell {
     
+    struct ViewModel {
+        let partOfSpeech: String
+        let definitionNumber: String
+        
+    }
+    
     static let reuseID = "MeaningTableViewCell"
     
     //Add part Of Speech Labels etc.
+    
+    let partOfSpeechTitle = UILabel()
+    let partOfSpeechlabel = UILabel()
     
     let defintionStackView = UIStackView()
     let definitionsLabel = UILabel()
@@ -50,6 +59,35 @@ class MeaningTableViewCell: UITableViewCell {
     }
     
     private func styling() {
+        
+        
+        partOfSpeechTitle.translatesAutoresizingMaskIntoConstraints = false
+        partOfSpeechTitle.text = "PART OF SPEECH"
+        partOfSpeechTitle.font = .boldSystemFont(ofSize: 16)
+        
+        partOfSpeechlabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        defintionStackView.translatesAutoresizingMaskIntoConstraints = false
+        defintionStackView.axis = .horizontal
+        defintionStackView.spacing = 6
+        defintionStackView.alignment = .center
+        
+        definitionsLabel.translatesAutoresizingMaskIntoConstraints = false
+        definitionsLabel.text = "DEFINITIONS"
+        definitionsLabel.font = .boldSystemFont(ofSize: 16)
+        
+        definitionsNumber.translatesAutoresizingMaskIntoConstraints = false
+        definitionsNumber.text = "6"
+        definitionsNumber.font = .boldSystemFont(ofSize: 16)
+        definitionsNumber.textColor = .darkGray
+        
+        definitionTableView.translatesAutoresizingMaskIntoConstraints = false
+        definitionTableView.tag = 2
+        definitionTableView.delegate = self
+        definitionTableView.dataSource = self
+        definitionTableView.register(DefinitionTableViewCell.self, forCellReuseIdentifier: DefinitionTableViewCell.reuseID)
+        definitionTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        
         synonymStackView.translatesAutoresizingMaskIntoConstraints = false
         synonymStackView.axis = .horizontal
         synonymStackView.spacing = 6
@@ -100,6 +138,8 @@ class MeaningTableViewCell: UITableViewCell {
     }
     
     private func layout() {
+        
+        
         
         contentView.addSubview(definitionTableView)
         

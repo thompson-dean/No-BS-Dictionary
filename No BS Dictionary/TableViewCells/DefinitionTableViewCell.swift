@@ -11,19 +11,14 @@ import UIKit
 class DefinitionTableViewCell: UITableViewCell {
     
     struct ViewModel {
-        let partOfSpeech: String
         let definition: String
+        let example: String
     }
     
     static let reuseID = "DefinitionTableViewCell"
     
-    lazy var partOfSpeechStackView = UIStackView()
-    lazy var partOfSpeechTitle = UILabel()
-    lazy var partOfSpeechLabel = UILabel()
-    
-    lazy var definitionTitleView = UILabel()
     lazy var definitionLabel = UILabel()
-    lazy var openButton = UIButton()
+    lazy var exampleLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,43 +32,38 @@ class DefinitionTableViewCell: UITableViewCell {
     }
     
     private func styling() {
-        partOfSpeechStackView.translatesAutoresizingMaskIntoConstraints = false
-        partOfSpeechStackView.axis = .vertical
-        partOfSpeechStackView.spacing = 8
-        
-        partOfSpeechLabel.translatesAutoresizingMaskIntoConstraints = false
-        partOfSpeechLabel.font = .preferredFont(forTextStyle: .subheadline)
         
         definitionLabel.translatesAutoresizingMaskIntoConstraints = false
         definitionLabel.numberOfLines = 0
+        definitionLabel.text = "Unfavorable; negative; not good."
         definitionLabel.font = .preferredFont(forTextStyle: .subheadline)
+        
+        exampleLabel.translatesAutoresizingMaskIntoConstraints = false
+        exampleLabel.text = "Abducting children is bad for mothers."
+        exampleLabel.font = .italicSystemFont(ofSize: 14)
+        
     }
     
     private func layout() {
-        partOfSpeechStackView.addArrangedSubview(partOfSpeechTitle)
-        partOfSpeechStackView.addArrangedSubview(partOfSpeechLabel)
-        contentView.addSubview(partOfSpeechStackView)
-        contentView.addSubview(definitionTitleView)
+        
+        
         contentView.addSubview(definitionLabel)
+        contentView.addSubview(exampleLabel)
         
         NSLayoutConstraint.activate([
-            partOfSpeechStackView.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
-            partOfSpeechStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 2),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: partOfSpeechStackView.trailingAnchor, multiplier: 2),
-            
-            definitionTitleView.topAnchor.constraint(equalToSystemSpacingBelow: partOfSpeechStackView.bottomAnchor, multiplier: 3),
-            definitionTitleView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 2),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: definitionTitleView.trailingAnchor, multiplier: 2),
-            
-            definitionLabel.topAnchor.constraint(equalToSystemSpacingBelow: definitionTitleView.bottomAnchor, multiplier: 1),
+            definitionLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
             definitionLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 2),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: definitionLabel.trailingAnchor, multiplier: 2)
+            trailingAnchor.constraint(equalToSystemSpacingAfter: definitionLabel.trailingAnchor, multiplier: 2),
+            
+            exampleLabel.topAnchor.constraint(equalToSystemSpacingBelow: definitionLabel.bottomAnchor, multiplier: 3),
+            exampleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 2),
+            trailingAnchor.constraint(equalToSystemSpacingAfter: exampleLabel.trailingAnchor, multiplier: 2)
+            
         ])
     }
     
-    func configure(partOfSpeech: String, definition: String) {
-        partOfSpeechLabel.text = partOfSpeech
-        definitionLabel.text = definition
+    func configure(viewModel: ViewModel) {
+        
     }
     
     
