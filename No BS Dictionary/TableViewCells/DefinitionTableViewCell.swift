@@ -5,7 +5,6 @@
 //  Created by Dean Thompson on 2022/05/05.
 //
 
-import Foundation
 import UIKit
 
 class DefinitionTableViewCell: UITableViewCell {
@@ -35,11 +34,12 @@ class DefinitionTableViewCell: UITableViewCell {
         
         definitionLabel.translatesAutoresizingMaskIntoConstraints = false
         definitionLabel.numberOfLines = 0
-        definitionLabel.text = "Unfavorable; negative; not good."
+        definitionLabel.text = "Unfavorable; negative; not good. Unfavorable; negative; not good. Unfavorable; negative; not good. Unfavorable; negative; not good."
         definitionLabel.font = .preferredFont(forTextStyle: .subheadline)
         
         exampleLabel.translatesAutoresizingMaskIntoConstraints = false
-        exampleLabel.text = "Abducting children is bad for mothers."
+        exampleLabel.text = "Abducting children is bad for mothers. Abducting children is bad for mothers."
+        exampleLabel.numberOfLines = 0
         exampleLabel.font = .italicSystemFont(ofSize: 14)
         
     }
@@ -52,12 +52,12 @@ class DefinitionTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             definitionLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
-            definitionLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 2),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: definitionLabel.trailingAnchor, multiplier: 2),
+            definitionLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
+            trailingAnchor.constraint(equalToSystemSpacingAfter: definitionLabel.trailingAnchor, multiplier: 1),
             
-            exampleLabel.topAnchor.constraint(equalToSystemSpacingBelow: definitionLabel.bottomAnchor, multiplier: 3),
-            exampleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 2),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: exampleLabel.trailingAnchor, multiplier: 2)
+            exampleLabel.topAnchor.constraint(equalToSystemSpacingBelow: definitionLabel.bottomAnchor, multiplier: 2),
+            exampleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
+            trailingAnchor.constraint(equalToSystemSpacingAfter: exampleLabel.trailingAnchor, multiplier: 1)
             
         ])
     }

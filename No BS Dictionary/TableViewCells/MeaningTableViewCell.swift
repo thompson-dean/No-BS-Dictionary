@@ -5,7 +5,6 @@
 //  Created by Dean Thompson on 2022/05/08.
 //
 
-import Foundation
 import UIKit
 
 class MeaningTableViewCell: UITableViewCell {
@@ -13,6 +12,8 @@ class MeaningTableViewCell: UITableViewCell {
     struct ViewModel {
         let partOfSpeech: String
         let definitionNumber: String
+        let synonyms: [String]
+        let antonyms: [String]
         
     }
     
@@ -21,11 +22,12 @@ class MeaningTableViewCell: UITableViewCell {
     //Add part Of Speech Labels etc.
     
     let partOfSpeechTitle = UILabel()
-    let partOfSpeechlabel = UILabel()
+    let partOfSpeechLabel = UILabel()
     
-    let defintionStackView = UIStackView()
+    let definitionStackView = UIStackView()
     let definitionsLabel = UILabel()
     let definitionsNumber = UILabel()
+    let definitionEmptyView = UIView()
     
     let definitionTableView = UITableView()
     
@@ -65,12 +67,13 @@ class MeaningTableViewCell: UITableViewCell {
         partOfSpeechTitle.text = "PART OF SPEECH"
         partOfSpeechTitle.font = .boldSystemFont(ofSize: 16)
         
-        partOfSpeechlabel.translatesAutoresizingMaskIntoConstraints = false
+        partOfSpeechLabel.translatesAutoresizingMaskIntoConstraints = false
+        partOfSpeechLabel.text = "noun"
         
-        defintionStackView.translatesAutoresizingMaskIntoConstraints = false
-        defintionStackView.axis = .horizontal
-        defintionStackView.spacing = 6
-        defintionStackView.alignment = .center
+        definitionStackView.translatesAutoresizingMaskIntoConstraints = false
+        definitionStackView.axis = .horizontal
+        definitionStackView.spacing = 6
+        definitionStackView.alignment = .center
         
         definitionsLabel.translatesAutoresizingMaskIntoConstraints = false
         definitionsLabel.text = "DEFINITIONS"
@@ -86,7 +89,9 @@ class MeaningTableViewCell: UITableViewCell {
         definitionTableView.delegate = self
         definitionTableView.dataSource = self
         definitionTableView.register(DefinitionTableViewCell.self, forCellReuseIdentifier: DefinitionTableViewCell.reuseID)
-        definitionTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        definitionTableView.isScrollEnabled = false
+        definitionTableView.rowHeight = 125
+//        definitionTableView.rowHeight = UITableView.automaticDimension
         
         synonymStackView.translatesAutoresizingMaskIntoConstraints = false
         synonymStackView.axis = .horizontal
@@ -111,6 +116,7 @@ class MeaningTableViewCell: UITableViewCell {
         synonymTableView.rowHeight = 23
         synonymTableView.register(UITableViewCell.self, forCellReuseIdentifier: "synonymCell")
         synonymTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        synonymTableView.isScrollEnabled = false
         
         antonymStackView.translatesAutoresizingMaskIntoConstraints = false
         antonymStackView.axis = .horizontal
@@ -135,29 +141,76 @@ class MeaningTableViewCell: UITableViewCell {
         antonymsTableView.rowHeight = 23
         antonymsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "antonymCell")
         antonymsTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        antonymsTableView.isScrollEnabled = false
     }
     
     private func layout() {
         
+        // Part of Speech added
+        contentView.addSubview(partOfSpeechTitle)
+        contentView.addSubview(partOfSpeechLabel)
         
-        
+        // Definiton Title Stack View Added
+        definitionStackView.addArrangedSubview(definitionsLabel)
+        definitionStackView.addArrangedSubview(definitionsNumber)
+        definitionStackView.addArrangedSubview(definitionEmptyView)
+        contentView.addSubview(definitionStackView)
+
+        //Defintions TableView Added
         contentView.addSubview(definitionTableView)
-        
+
+        //synonyms title and tableview
         synonymStackView.addArrangedSubview(synonymTitleLabel)
         synonymStackView.addArrangedSubview(synonymNumberLabel)
         synonymStackView.addArrangedSubview(synonymEmptyView)
         contentView.addSubview(synonymStackView)
+
         contentView.addSubview(synonymTableView)
-        
+
+        //Antonyms title and tableview
         antonymStackView.addArrangedSubview(antonymTitleLabel)
         antonymStackView.addArrangedSubview(antonymNumberLabel)
         antonymStackView.addArrangedSubview(antonymEmptyView)
         contentView.addSubview(antonymStackView)
+
         contentView.addSubview(antonymsTableView)
         
         
         NSLayoutConstraint.activate([
-        
+            partOfSpeechTitle.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
+            partOfSpeechTitle.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
+            
+            partOfSpeechLabel.topAnchor.constraint(equalToSystemSpacingBelow: partOfSpeechTitle.bottomAnchor, multiplier: 0),
+            partOfSpeechLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
+            
+            definitionStackView.topAnchor.constraint(equalToSystemSpacingBelow: partOfSpeechLabel.bottomAnchor, multiplier: 3),
+            definitionStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
+            trailingAnchor.constraint(equalToSystemSpacingAfter: definitionStackView.trailingAnchor, multiplier: 1),
+            
+            definitionTableView.topAnchor.constraint(equalToSystemSpacingBelow: definitionStackView.bottomAnchor, multiplier: 1),
+            definitionTableView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
+            trailingAnchor.constraint(equalToSystemSpacingAfter: definitionTableView.trailingAnchor, multiplier: 1),
+            definitionTableView.heightAnchor.constraint(equalToConstant: 375),
+            
+            synonymStackView.topAnchor.constraint(equalToSystemSpacingBelow: definitionTableView.bottomAnchor, multiplier: 2),
+            synonymStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
+            synonymStackView.widthAnchor.constraint(equalToConstant: 180),
+            
+            synonymTableView.topAnchor.constraint(equalToSystemSpacingBelow: synonymStackView.bottomAnchor, multiplier: 1),
+            synonymTableView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 0),
+            synonymTableView.widthAnchor.constraint(equalToConstant: 180),
+            bottomAnchor.constraint(equalToSystemSpacingBelow: synonymTableView.bottomAnchor, multiplier: 1),
+            
+            antonymStackView.topAnchor.constraint(equalToSystemSpacingBelow: definitionTableView.bottomAnchor, multiplier: 2),
+            antonymStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: synonymStackView.trailingAnchor, multiplier: 3),
+            antonymStackView.widthAnchor.constraint(equalToConstant: 180),
+            
+            antonymsTableView.topAnchor.constraint(equalToSystemSpacingBelow: antonymStackView.bottomAnchor, multiplier: 1),
+            antonymsTableView.leadingAnchor.constraint(equalToSystemSpacingAfter: synonymTableView.trailingAnchor, multiplier: 3),
+            antonymsTableView.widthAnchor.constraint(equalToConstant: 180),
+            bottomAnchor.constraint(equalToSystemSpacingBelow: antonymsTableView.bottomAnchor, multiplier: 1)
+            
+            
         ])
     }
 }
@@ -175,16 +228,18 @@ extension MeaningTableViewCell: UITableViewDelegate {
             definitionTableView.deselectRow(at: indexPath, animated: false)
         }
     }
+    
 }
 
 extension MeaningTableViewCell: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 0 {
-            return 2
+            return 6
         } else if tableView.tag == 1 {
-            return 2
+            return 6
         } else {
-            return 2
+            return 3
         }
     }
     
@@ -195,15 +250,16 @@ extension MeaningTableViewCell: UITableViewDataSource {
             cell.textLabel?.text = "Test"
             return cell
             
-            
         } else if tableView.tag == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "antonymCell", for: indexPath)
             cell.textLabel?.font = .preferredFont(forTextStyle: .subheadline)
             cell.textLabel?.text = "Test"
             return cell
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: DefinitionTableViewCell.reuseID, for: indexPath) as! DefinitionTableViewCell
-            
+            cell.setNeedsUpdateConstraints()
+            cell.updateConstraintsIfNeeded()
             return cell
         }
         

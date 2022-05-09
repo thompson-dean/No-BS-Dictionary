@@ -5,7 +5,7 @@
 //  Created by Dean Thompson on 2022/05/07.
 //
 
-import Foundation
+import UIKit
 
 enum NetworkError: Error {
     case serverError
