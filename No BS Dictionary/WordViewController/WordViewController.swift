@@ -21,6 +21,8 @@ class WordViewController: UIViewController {
         
     }
     
+    var meaningCellViewModels: [MeaningTableViewCell.ViewModel] = []
+    
     // Word Title
     let word = UILabel()
     
@@ -36,6 +38,7 @@ class WordViewController: UIViewController {
         super.viewDidLoad()
  
         view.backgroundColor = .systemBackground
+        fetchDataandLoadView()
         style()
         layout()
     }
@@ -73,6 +76,7 @@ extension WordViewController {
         meaningTableView.delegate = self
         meaningTableView.dataSource = self
         meaningTableView.rowHeight = 700
+//        meaningTableView.rowHeight = UITableView.automaticDimension
         meaningTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     
     }
@@ -98,7 +102,7 @@ extension WordViewController {
             meaningTableView.topAnchor.constraint(equalToSystemSpacingBelow: phoneticsStackView.bottomAnchor, multiplier: 1),
             meaningTableView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: meaningTableView.trailingAnchor, multiplier: 1),
-            view.bottomAnchor.constraint(equalToSystemSpacingBelow: meaningTableView.bottomAnchor, multiplier: 2)
+            view.bottomAnchor.constraint(equalToSystemSpacingBelow: meaningTableView.bottomAnchor, multiplier: 1)
             
         ])
     }
@@ -141,6 +145,12 @@ extension WordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MeaningTableViewCell.reuseID, for: indexPath) as! MeaningTableViewCell
         
+            cell.definitionsNumber.text = "\(self.searchWords[0].meanings[indexPath.row].definitions.count)"
+            cell.synonymNumberLabel.text = "\(self.searchWords[0].meanings[indexPath.row].synonyms.count)"
+            cell.antonymNumberLabel.text = "\(self.searchWords[0].meanings[indexPath.row].antonyms.count)"
+            cell.synonyms = self.searchWords[0].meanings[indexPath.row].synonyms
+            cell.antonyms = self.searchWords[0].meanings[indexPath.row].antonyms
+        
         return cell
     }
     
@@ -156,11 +166,18 @@ extension WordViewController {
                 self.searchWords = wordUnits
                 self.word.text = self.searchWords[0].word
                 self.phoneticsButton.setTitle(self.searchWords[0].phonetics[0].text, for: [])
+//                self.configureTableCells(with: searchWords)
+                self.meaningTableView.reloadData()
             case .failure(let error):
                 print(error.localizedDescription)
             }
-            
-            
+        }
+    }
+    
+    private func configureTableCells(with wordUnits: [WordUnit]) {
+        meaningCellViewModels = wordUnits.map {
+            MeaningTableViewCell.ViewModel(partOfSpeech: $0.meanings[<#Int#>].partOfSpeech, definitionNumber: "\($0.meanings[$0].definitions.count)", synonymsNumber: "\($0.meanings[$0].synonyms.count)", synonyms: $0.meanings[$0].synonyms, antonymsNumber: "\($0.meanings[$0].antonyms.count)", antonyms: $0.meanings[$0].antonyms)
+
         }
     }
 }

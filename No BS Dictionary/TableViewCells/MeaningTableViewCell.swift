@@ -9,10 +9,16 @@ import UIKit
 
 class MeaningTableViewCell: UITableViewCell {
     
+    
+    var synonyms = [String]()
+    var antonyms = [String]()
+    
     struct ViewModel {
         let partOfSpeech: String
         let definitionNumber: String
+        let synonymsNumber: String
         let synonyms: [String]
+        let antonymsNumber: String
         let antonyms: [String]
         
     }
@@ -22,11 +28,11 @@ class MeaningTableViewCell: UITableViewCell {
     //Add part Of Speech Labels etc.
     
     let partOfSpeechTitle = UILabel()
-    let partOfSpeechLabel = UILabel()
+    var partOfSpeechLabel = UILabel()
     
     let definitionStackView = UIStackView()
     let definitionsLabel = UILabel()
-    let definitionsNumber = UILabel()
+    var definitionsNumber = UILabel()
     let definitionEmptyView = UIView()
     
     let definitionTableView = UITableView()
@@ -66,9 +72,8 @@ class MeaningTableViewCell: UITableViewCell {
         partOfSpeechTitle.translatesAutoresizingMaskIntoConstraints = false
         partOfSpeechTitle.text = "PART OF SPEECH"
         partOfSpeechTitle.font = .boldSystemFont(ofSize: 16)
-        
         partOfSpeechLabel.translatesAutoresizingMaskIntoConstraints = false
-        partOfSpeechLabel.text = "noun"
+        
         
         definitionStackView.translatesAutoresizingMaskIntoConstraints = false
         definitionStackView.axis = .horizontal
@@ -80,7 +85,6 @@ class MeaningTableViewCell: UITableViewCell {
         definitionsLabel.font = .boldSystemFont(ofSize: 16)
         
         definitionsNumber.translatesAutoresizingMaskIntoConstraints = false
-        definitionsNumber.text = "6"
         definitionsNumber.font = .boldSystemFont(ofSize: 16)
         definitionsNumber.textColor = .darkGray
         
@@ -103,7 +107,6 @@ class MeaningTableViewCell: UITableViewCell {
         synonymTitleLabel.font = .boldSystemFont(ofSize: 16)
         
         synonymNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-        synonymNumberLabel.text = "6"
         synonymNumberLabel.font = .boldSystemFont(ofSize: 16)
         synonymNumberLabel.textColor = .darkGray
         
@@ -128,7 +131,6 @@ class MeaningTableViewCell: UITableViewCell {
         antonymTitleLabel.font = .boldSystemFont(ofSize: 16)
         
         antonymNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-        antonymNumberLabel.text = "6"
         antonymNumberLabel.font = .boldSystemFont(ofSize: 16)
         antonymNumberLabel.textColor = .darkGray
         
@@ -235,9 +237,9 @@ extension MeaningTableViewCell: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 0 {
-            return 6
+            return synonyms.count
         } else if tableView.tag == 1 {
-            return 6
+            return antonyms.count
         } else {
             return 3
         }
@@ -247,13 +249,13 @@ extension MeaningTableViewCell: UITableViewDataSource {
         if tableView.tag == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "synonymCell", for: indexPath)
             cell.textLabel?.font = .preferredFont(forTextStyle: .subheadline)
-            cell.textLabel?.text = "Test"
+            cell.textLabel?.text = synonyms[indexPath.row]
             return cell
             
         } else if tableView.tag == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "antonymCell", for: indexPath)
             cell.textLabel?.font = .preferredFont(forTextStyle: .subheadline)
-            cell.textLabel?.text = "Test"
+            cell.textLabel?.text = antonyms[indexPath.row]
             return cell
             
         } else {
@@ -264,6 +266,16 @@ extension MeaningTableViewCell: UITableViewDataSource {
         }
         
     }
-    
-    
+}
+
+extension MeaningTableViewCell {
+    func configure(vm: ViewModel) {
+        partOfSpeechLabel.text = vm.partOfSpeech
+        definitionsNumber.text = vm.definitionNumber
+        synonymNumberLabel.text = vm.synonymsNumber
+        synonyms = vm.synonyms
+        antonymNumberLabel.text = vm.antonymsNumber
+        antonyms = vm.antonyms
+        
+    }
 }
