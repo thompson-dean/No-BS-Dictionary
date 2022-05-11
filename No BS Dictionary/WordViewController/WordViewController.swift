@@ -133,19 +133,19 @@ extension WordViewController: UITableViewDelegate {
 //MARK: - TABLEVIEW DATA SOURCE
 extension WordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return searchWords.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MeaningTableViewCell.reuseID, for: indexPath) as? MeaningTableViewCell else { return UITableViewCell() }
-        DispatchQueue.main.async {
-            cell.definitionsNumber.text = "\(self.searchWords[0].meanings[indexPath.row].definitions.count)"
-            cell.synonymNumberLabel.text = "\(self.searchWords[0].meanings[indexPath.row].synonyms.count)"
-            cell.antonymNumberLabel.text = "\(self.searchWords[0].meanings[indexPath.row].antonyms.count)"
-            cell.synonyms = self.searchWords[0].meanings[indexPath.row].synonyms
-            cell.antonyms = self.searchWords[0].meanings[indexPath.row].antonyms
-        }
-            
+        
+        cell.definitionsNumber.text = "\(self.searchWords[0].meanings[indexPath.row].definitions.count)"
+        cell.synonymNumberLabel.text = "\(self.searchWords[0].meanings[indexPath.row].synonyms.count)"
+        cell.antonymNumberLabel.text = "\(self.searchWords[0].meanings[indexPath.row].antonyms.count)"
+        cell.synonyms = self.searchWords[0].meanings[indexPath.row].synonyms
+        cell.antonyms = self.searchWords[0].meanings[indexPath.row].antonyms
+        cell.antonymsTableView.reloadData()
+        cell.synonymTableView.reloadData()
         
         return cell
     }
@@ -157,17 +157,20 @@ extension WordViewController: UITableViewDataSource {
 extension WordViewController {
     private func fetchDataandLoadView() {
         fetchWordUnits(forWord: chosenWord) { result in
-            switch result {
-            case .success(let wordUnits):
-                self.searchWords = wordUnits
-                print(self.searchWords)
-                self.word.text = self.searchWords[0].word
-                self.phoneticsButton.setTitle(self.searchWords[0].phonetics[0].text, for: [])
-//                self.configureTableCells(with: searchWords)
-                self.meaningTableView.reloadData()
-            case .failure(let error):
-                print(error.localizedDescription)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let wordUnits):
+                    self.searchWords = wordUnits
+                    print(self.searchWords)
+                    self.word.text = self.searchWords[0].word
+                    self.phoneticsButton.setTitle(self.searchWords[0].phonetics[0].text, for: [])
+    //                self.configureTableCells(with: searchWords)
+                    self.meaningTableView.reloadData()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
+            
         }
     }
     

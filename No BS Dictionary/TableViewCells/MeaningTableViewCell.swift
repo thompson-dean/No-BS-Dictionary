@@ -10,8 +10,8 @@ import UIKit
 class MeaningTableViewCell: UITableViewCell {
     
     
-    var synonyms = [String]()
-    var antonyms = [String]()
+    var synonyms = ["Dummy Data"]
+    var antonyms = ["Dummy Data"]
     
     struct ViewModel {
         let partOfSpeech: String
@@ -86,6 +86,7 @@ class MeaningTableViewCell: UITableViewCell {
         
         definitionsNumber.translatesAutoresizingMaskIntoConstraints = false
         definitionsNumber.font = .boldSystemFont(ofSize: 16)
+        definitionsNumber.text = "0"
         definitionsNumber.textColor = .darkGray
         
         definitionTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -108,6 +109,7 @@ class MeaningTableViewCell: UITableViewCell {
         
         synonymNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         synonymNumberLabel.font = .boldSystemFont(ofSize: 16)
+        synonymNumberLabel.text = "0"
         synonymNumberLabel.textColor = .darkGray
         
         synonymEmptyView.translatesAutoresizingMaskIntoConstraints = false
@@ -133,6 +135,7 @@ class MeaningTableViewCell: UITableViewCell {
         antonymNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         antonymNumberLabel.font = .boldSystemFont(ofSize: 16)
         antonymNumberLabel.textColor = .darkGray
+        antonymNumberLabel.text = "0"
         
         antonymEmptyView.translatesAutoresizingMaskIntoConstraints = false
         
