@@ -12,9 +12,10 @@ class WordViewController: UIViewController {
     
     var chosenWord = ""
     
-    var searchWords = [WordUnit]()
+    var meanings = [Meaning]()
     
-    var meaningCellViewModels: [MeaningTableViewCell.ViewModel] = []
+    var searchWords = [WordUnit]()
+
     
     // Word Title
     let word = UILabel()
@@ -133,17 +134,20 @@ extension WordViewController: UITableViewDelegate {
 //MARK: - TABLEVIEW DATA SOURCE
 extension WordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchWords.count
+        return meanings.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MeaningTableViewCell.reuseID, for: indexPath) as? MeaningTableViewCell else { return UITableViewCell() }
         
-        cell.definitionsNumber.text = "\(self.searchWords[0].meanings[indexPath.row].definitions.count)"
+//        cell.definitionsNumber.text = "\(self.searchWords[0].meanings[indexPath.row].definitions.count)"
         cell.synonymNumberLabel.text = "\(self.searchWords[0].meanings[indexPath.row].synonyms.count)"
         cell.antonymNumberLabel.text = "\(self.searchWords[0].meanings[indexPath.row].antonyms.count)"
         cell.synonyms = self.searchWords[0].meanings[indexPath.row].synonyms
         cell.antonyms = self.searchWords[0].meanings[indexPath.row].antonyms
+        cell.definitions = self.searchWords[0].meanings[indexPath.row].definitions
+        
+        cell.definitionTableView.reloadData()
         cell.antonymsTableView.reloadData()
         cell.synonymTableView.reloadData()
         
@@ -161,6 +165,8 @@ extension WordViewController {
                 switch result {
                 case .success(let wordUnits):
                     self.searchWords = wordUnits
+                    self.meanings = wordUnits[0].meanings
+                    
                     print(self.searchWords)
                     self.word.text = self.searchWords[0].word
                     self.phoneticsButton.setTitle(self.searchWords[0].phonetics[0].text, for: [])

@@ -10,18 +10,10 @@ import UIKit
 class MeaningTableViewCell: UITableViewCell {
     
     
-    var synonyms = ["Dummy Data"]
-    var antonyms = ["Dummy Data"]
+    var synonyms = [String]()
+    var antonyms = [String]()
     
-    struct ViewModel {
-        let partOfSpeech: String
-        let definitionNumber: String
-        let synonymsNumber: String
-        let synonyms: [String]
-        let antonymsNumber: String
-        let antonyms: [String]
-        
-    }
+    var definitions = [Definition]()
     
     static let reuseID = "MeaningTableViewCell"
     
@@ -244,7 +236,8 @@ extension MeaningTableViewCell: UITableViewDataSource {
         } else if tableView.tag == 1 {
             return antonyms.count
         } else {
-            return 3
+            return definitions.count
+            
         }
     }
     
@@ -263,6 +256,10 @@ extension MeaningTableViewCell: UITableViewDataSource {
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: DefinitionTableViewCell.reuseID, for: indexPath) as! DefinitionTableViewCell
+            
+            cell.definitionLabel.text = definitions[indexPath.row].definition
+            cell.exampleLabel.text = definitions[indexPath.row].example
+            
             cell.setNeedsUpdateConstraints()
             cell.updateConstraintsIfNeeded()
             return cell
@@ -271,14 +268,14 @@ extension MeaningTableViewCell: UITableViewDataSource {
     }
 }
 
-extension MeaningTableViewCell {
-    func configure(vm: ViewModel) {
-        partOfSpeechLabel.text = vm.partOfSpeech
-        definitionsNumber.text = vm.definitionNumber
-        synonymNumberLabel.text = vm.synonymsNumber
-        synonyms = vm.synonyms
-        antonymNumberLabel.text = vm.antonymsNumber
-        antonyms = vm.antonyms
-        
-    }
-}
+//extension MeaningTableViewCell {
+//    func configure(vm: ViewModel) {
+//        partOfSpeechLabel.text = vm.partOfSpeech
+//        definitionsNumber.text = vm.definitionNumber
+//        synonymNumberLabel.text = vm.synonymsNumber
+//        synonyms = vm.synonyms
+//        antonymNumberLabel.text = vm.antonymsNumber
+//        antonyms = vm.antonyms
+//
+//    }
+//}
