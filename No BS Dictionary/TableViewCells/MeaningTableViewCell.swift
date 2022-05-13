@@ -87,7 +87,7 @@ class MeaningTableViewCell: UITableViewCell {
         definitionTableView.dataSource = self
         definitionTableView.register(DefinitionTableViewCell.self, forCellReuseIdentifier: DefinitionTableViewCell.reuseID)
         definitionTableView.isScrollEnabled = false
-        definitionTableView.rowHeight = 125
+        definitionTableView.rowHeight = 80
 //        definitionTableView.rowHeight = UITableView.automaticDimension
         
         synonymStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -187,7 +187,7 @@ class MeaningTableViewCell: UITableViewCell {
             definitionTableView.topAnchor.constraint(equalToSystemSpacingBelow: definitionStackView.bottomAnchor, multiplier: 1),
             definitionTableView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
             trailingAnchor.constraint(equalToSystemSpacingAfter: definitionTableView.trailingAnchor, multiplier: 1),
-            definitionTableView.heightAnchor.constraint(equalToConstant: 375),
+            definitionTableView.heightAnchor.constraint(equalToConstant: 320),
             
             synonymStackView.topAnchor.constraint(equalToSystemSpacingBelow: definitionTableView.bottomAnchor, multiplier: 2),
             synonymStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
@@ -215,7 +215,8 @@ class MeaningTableViewCell: UITableViewCell {
 extension MeaningTableViewCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.tag == 0 {
-            
+//            let vc = WordViewController()
+//            self.navigationController?.pushViewController(vc, animated: true)
             synonymTableView.deselectRow(at: indexPath, animated: true)
         } else if tableView.tag == 1 {
 
@@ -267,15 +268,3 @@ extension MeaningTableViewCell: UITableViewDataSource {
         
     }
 }
-
-//extension MeaningTableViewCell {
-//    func configure(vm: ViewModel) {
-//        partOfSpeechLabel.text = vm.partOfSpeech
-//        definitionsNumber.text = vm.definitionNumber
-//        synonymNumberLabel.text = vm.synonymsNumber
-//        synonyms = vm.synonyms
-//        antonymNumberLabel.text = vm.antonymsNumber
-//        antonyms = vm.antonyms
-//
-//    }
-//}

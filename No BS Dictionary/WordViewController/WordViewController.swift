@@ -63,7 +63,7 @@ extension WordViewController {
         speakerImage.image = UIImage(systemName: "speaker.wave.3.fill")
         speakerImage.contentMode = .scaleAspectFit
         
-        // using this view as a spacer fo the stackview
+        // using this view as a spacer of the stackview
         emptyView.translatesAutoresizingMaskIntoConstraints = false
         
         meaningTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,22 +103,7 @@ extension WordViewController {
     }
     
     @objc func playPhonetics(_ sender: UIButton) {
-        print("jazz")
-    }
-    
-    func attributedText(withString string: String, boldString: String) -> NSAttributedString {
-        let boldAttribute = [
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)
-        ]
-        let regularAttribute = [
-            NSAttributedString.Key.font: UIFont.systemFontSize
-        ]
-        let boldText = NSAttributedString(string: boldString, attributes: boldAttribute)
-        let regularText = NSAttributedString(string: string, attributes: regularAttribute)
-        let newString = NSMutableAttributedString()
-        newString.append(boldText)
-        newString.append(regularText)
-        return newString
+        // Add text to voice here
     }
 }
 
@@ -140,7 +125,8 @@ extension WordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MeaningTableViewCell.reuseID, for: indexPath) as? MeaningTableViewCell else { return UITableViewCell() }
         
-//        cell.definitionsNumber.text = "\(self.searchWords[0].meanings[indexPath.row].definitions.count)"
+        cell.partOfSpeechLabel.text = self.searchWords[0].meanings[indexPath.row].partOfSpeech
+        cell.definitionsNumber.text = "\(self.searchWords[0].meanings[indexPath.row].definitions.count)"
         cell.synonymNumberLabel.text = "\(self.searchWords[0].meanings[indexPath.row].synonyms.count)"
         cell.antonymNumberLabel.text = "\(self.searchWords[0].meanings[indexPath.row].antonyms.count)"
         cell.synonyms = self.searchWords[0].meanings[indexPath.row].synonyms
@@ -164,14 +150,13 @@ extension WordViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let wordUnits):
+                    
                     self.searchWords = wordUnits
                     self.meanings = wordUnits[0].meanings
-                    
-                    print(self.searchWords)
                     self.word.text = self.searchWords[0].word
                     self.phoneticsButton.setTitle(self.searchWords[0].phonetics[0].text, for: [])
-    //                self.configureTableCells(with: searchWords)
                     self.meaningTableView.reloadData()
+                    
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -179,12 +164,24 @@ extension WordViewController {
             
         }
     }
-    
-//    private func configureTableCells(with wordUnits: [WordUnit]) {
-//        meaningCellViewModels = wordUnits.map {
-//            MeaningTableViewCell.ViewModel(partOfSpeech: $0.meanings[<#Int#>].partOfSpeech, definitionNumber: "\($0.meanings[$0].definitions.count)", synonymsNumber: "\($0.meanings[$0].synonyms.count)", synonyms: $0.meanings[$0].synonyms, antonymsNumber: "\($0.meanings[$0].antonyms.count)", antonyms: $0.meanings[$0].antonyms)
-//
-//        }
-//    }
+
+}
+
+
+extension WordViewController {
+    func attributedText(withString string: String, boldString: String) -> NSAttributedString {
+        let boldAttribute = [
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)
+        ]
+        let regularAttribute = [
+            NSAttributedString.Key.font: UIFont.systemFontSize
+        ]
+        let boldText = NSAttributedString(string: boldString, attributes: boldAttribute)
+        let regularText = NSAttributedString(string: string, attributes: regularAttribute)
+        let newString = NSMutableAttributedString()
+        newString.append(boldText)
+        newString.append(regularText)
+        return newString
+    }
 }
 
