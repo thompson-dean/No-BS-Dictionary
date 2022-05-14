@@ -26,7 +26,7 @@ class WordViewController: UIViewController {
     let speakerImage = UIImageView()
     let emptyView = UIView()
     
-    let meaningTableView = UITableView()
+    let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,13 +66,16 @@ extension WordViewController {
         // using this view as a spacer of the stackview
         emptyView.translatesAutoresizingMaskIntoConstraints = false
         
-        meaningTableView.translatesAutoresizingMaskIntoConstraints = false
-        meaningTableView.register(MeaningTableViewCell.self, forCellReuseIdentifier: MeaningTableViewCell.reuseID)
-        meaningTableView.delegate = self
-        meaningTableView.dataSource = self
-        meaningTableView.rowHeight = 700
-//        meaningTableView.rowHeight = UITableView.automaticDimension
-        meaningTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        //REGISTER ALL THE CELLS HERE
+        
+//        tableView.register(TableViewCell.self, forCellReuseIdentifier: MeaningTableViewCell.reuseID)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.estimatedRowHeight = 700
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     
     }
     
@@ -84,7 +87,7 @@ extension WordViewController {
         phoneticsStackView.addArrangedSubview(emptyView)
         view.addSubview(phoneticsStackView)
         
-        view.addSubview(meaningTableView)
+        view.addSubview(tableView)
     
         NSLayoutConstraint.activate([
             word.topAnchor.constraint(equalToSystemSpacingBelow: view.topAnchor, multiplier: 12),
@@ -94,10 +97,10 @@ extension WordViewController {
             phoneticsStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: phoneticsStackView.trailingAnchor, multiplier: 2),
             
-            meaningTableView.topAnchor.constraint(equalToSystemSpacingBelow: phoneticsStackView.bottomAnchor, multiplier: 1),
-            meaningTableView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: meaningTableView.trailingAnchor, multiplier: 1),
-            view.bottomAnchor.constraint(equalToSystemSpacingBelow: meaningTableView.bottomAnchor, multiplier: 1)
+            tableView.topAnchor.constraint(equalToSystemSpacingBelow: phoneticsStackView.bottomAnchor, multiplier: 1),
+            tableView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: tableView.trailingAnchor, multiplier: 1),
+            view.bottomAnchor.constraint(equalToSystemSpacingBelow: tableView.bottomAnchor, multiplier: 1)
             
         ])
     }
@@ -111,7 +114,7 @@ extension WordViewController {
 
 extension WordViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        meaningTableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
 }
@@ -119,24 +122,13 @@ extension WordViewController: UITableViewDelegate {
 //MARK: - TABLEVIEW DATA SOURCE
 extension WordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return meanings.count
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MeaningTableViewCell.reuseID, for: indexPath) as? MeaningTableViewCell else { return UITableViewCell() }
         
-        cell.partOfSpeechLabel.text = self.searchWords[0].meanings[indexPath.row].partOfSpeech
-        cell.definitionsNumber.text = "\(self.searchWords[0].meanings[indexPath.row].definitions.count)"
-        cell.synonymNumberLabel.text = "\(self.searchWords[0].meanings[indexPath.row].synonyms.count)"
-        cell.antonymNumberLabel.text = "\(self.searchWords[0].meanings[indexPath.row].antonyms.count)"
-        cell.synonyms = self.searchWords[0].meanings[indexPath.row].synonyms
-        cell.antonyms = self.searchWords[0].meanings[indexPath.row].antonyms
-        cell.definitions = self.searchWords[0].meanings[indexPath.row].definitions
-        
-        cell.definitionTableView.reloadData()
-        cell.antonymsTableView.reloadData()
-        cell.synonymTableView.reloadData()
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "INSERTNEWONE", for: indexPath)
+                
         return cell
     }
     
@@ -152,10 +144,8 @@ extension WordViewController {
                 case .success(let wordUnits):
                     
                     self.searchWords = wordUnits
-                    self.meanings = wordUnits[0].meanings
                     self.word.text = self.searchWords[0].word
-                    self.phoneticsButton.setTitle(self.searchWords[0].phonetics[0].text, for: [])
-                    self.meaningTableView.reloadData()
+                    self.tableView.reloadData()
                     
                 case .failure(let error):
                     print(error.localizedDescription)
