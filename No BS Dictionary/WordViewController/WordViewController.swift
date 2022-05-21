@@ -70,7 +70,9 @@ extension WordViewController {
         
         //REGISTER ALL THE CELLS HERE
         
-//        tableView.register(TableViewCell.self, forCellReuseIdentifier: MeaningTableViewCell.reuseID)
+        tableView.register(PartOfSpeechTableViewCell.self, forCellReuseIdentifier: PartOfSpeechTableViewCell.reuseID)
+        tableView.register(DefinitionTableViewCell.self, forCellReuseIdentifier: DefinitionTableViewCell.reuseID)
+        tableView.register(SynAntTableViewCell.self, forCellReuseIdentifier: SynAntTableViewCell.reuseID)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 700
@@ -122,7 +124,7 @@ extension WordViewController: UITableViewDelegate {
 //MARK: - TABLEVIEW DATA SOURCE
 extension WordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

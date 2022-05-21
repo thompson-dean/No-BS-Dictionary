@@ -6,3 +6,33 @@
 //
 
 import Foundation
+
+import Foundation
+import UIKit
+
+class SynAntTableViewCell: UITableViewCell {
+    
+    static let reuseID = "SynAntTableViewCell"
+    
+    lazy var definitionLabel = UILabel()
+    lazy var exampleLabel = UILabel()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        styling()
+        layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func styling() {
+        
+    }
+    
+    func layout() {
+        
+    }
+}
