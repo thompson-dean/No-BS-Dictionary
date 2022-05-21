@@ -68,15 +68,17 @@ extension WordViewController {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        //REGISTER ALL THE CELLS HERE
-        
+        //REGISTER CELLS
         tableView.register(PartOfSpeechTableViewCell.self, forCellReuseIdentifier: PartOfSpeechTableViewCell.reuseID)
         tableView.register(DefinitionTableViewCell.self, forCellReuseIdentifier: DefinitionTableViewCell.reuseID)
         tableView.register(SynAntTableViewCell.self, forCellReuseIdentifier: SynAntTableViewCell.reuseID)
+        
+        //TableView Details
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 700
+        tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableView.automaticDimension
+        
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     
     }
@@ -124,14 +126,23 @@ extension WordViewController: UITableViewDelegate {
 //MARK: - TABLEVIEW DATA SOURCE
 extension WordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "INSERTNEWONE", for: indexPath)
-                
-        return cell
+        let cell1 = tableView.dequeueReusableCell(withIdentifier: PartOfSpeechTableViewCell.reuseID, for: indexPath) as! PartOfSpeechTableViewCell
+        let cell2 = tableView.dequeueReusableCell(withIdentifier: DefinitionTableViewCell.reuseID, for: indexPath) as! DefinitionTableViewCell
+        let cell3 = tableView.dequeueReusableCell(withIdentifier: SynAntTableViewCell.reuseID, for: indexPath) as! SynAntTableViewCell
+
+        if indexPath.row == 0 {
+            return cell1
+        } else if indexPath.row == 1 {
+            return cell2
+        } else {
+            return cell3
+        }
+        
     }
     
 }
@@ -147,7 +158,10 @@ extension WordViewController {
                     
                     self.searchWords = wordUnits
                     self.word.text = self.searchWords[0].word
+                    self.phoneticsButton.setTitle(self.searchWords[0].phonetics[0].text, for: .normal)
+                    
                     self.tableView.reloadData()
+                    
                     
                 case .failure(let error):
                     print(error.localizedDescription)

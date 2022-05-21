@@ -8,14 +8,11 @@
 import UIKit
 
 class DefinitionTableViewCell: UITableViewCell {
-    
-    struct ViewModel {
-        let definition: String
-        let example: String
-    }
+   
     
     static let reuseID = "DefinitionTableViewCell"
     
+    lazy var title = UILabel()
     lazy var definitionLabel = UILabel()
     lazy var exampleLabel = UILabel()
     
@@ -32,6 +29,10 @@ class DefinitionTableViewCell: UITableViewCell {
     
     private func styling() {
         
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.font = .systemFont(ofSize: 16, weight: .bold)
+        title.text = "DEFINITION"
+        
         definitionLabel.translatesAutoresizingMaskIntoConstraints = false
         definitionLabel.numberOfLines = 0
         definitionLabel.text = "Unfavorable; negative; not good. Unfavorable; negative; not good. Unfavorable; negative; not good. Unfavorable; negative; not good."
@@ -46,25 +47,27 @@ class DefinitionTableViewCell: UITableViewCell {
     
     private func layout() {
         
-        
+        contentView.addSubview(title)
         contentView.addSubview(definitionLabel)
         contentView.addSubview(exampleLabel)
         
         NSLayoutConstraint.activate([
-            definitionLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
-            definitionLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: definitionLabel.trailingAnchor, multiplier: 1),
+            title.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: 1),
+            title.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1),
+            
+            definitionLabel.topAnchor.constraint(equalToSystemSpacingBelow: title.bottomAnchor, multiplier: 1),
+            definitionLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1),
+            contentView.trailingAnchor.constraint(equalToSystemSpacingAfter: definitionLabel.trailingAnchor, multiplier: 1),
             
             exampleLabel.topAnchor.constraint(equalToSystemSpacingBelow: definitionLabel.bottomAnchor, multiplier: 2),
-            exampleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: exampleLabel.trailingAnchor, multiplier: 1)
+            exampleLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1),
+            contentView.trailingAnchor.constraint(equalToSystemSpacingAfter: exampleLabel.trailingAnchor, multiplier: 1),
+            contentView.bottomAnchor.constraint(equalToSystemSpacingBelow: exampleLabel.bottomAnchor, multiplier: 1)
             
         ])
     }
     
-    func configure(viewModel: ViewModel) {
-        
-    }
+   
     
     
 }
