@@ -47,7 +47,7 @@ class PartOfSpeechTableViewCell: UITableViewCell {
             title.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1),
             
             
-            partOfSpeech.topAnchor.constraint(equalToSystemSpacingBelow: title.bottomAnchor, multiplier: 2),
+            partOfSpeech.topAnchor.constraint(equalToSystemSpacingBelow: title.bottomAnchor, multiplier:   1),
             partOfSpeech.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
             contentView.bottomAnchor.constraint(equalToSystemSpacingBelow: partOfSpeech.bottomAnchor, multiplier: 1)
         ])

@@ -12,10 +12,98 @@ import UIKit
 
 class SynAntTableViewCell: UITableViewCell {
     
+    let synonymExamples = [
+        "badass",
+        "evil",
+        "vicious",
+        "vile",
+        "wicked",
+        "false",
+        "spurious",
+        "unhealthful",
+        "unwholesome",
+        "faulty",
+        "inoperative",
+        "negative",
+        "unfavorable",
+        "inappropriate",
+        "unfit",
+        "hot",
+        "rubber",
+        "dire",
+        "severe",
+        "urgent",
+        "foul",
+        "malodorous",
+        "rotten",
+        "bungling",
+        "inept",
+        "repulsive",
+        "unsightly",
+        "foul",
+        "loathsome",
+        "ill",
+        "poorly",
+        "sickly",
+        "abandoned",
+        "abominable",
+        "base",
+        "corrupt",
+        "deficient",
+        "detestable",
+        "disgusting",
+        "inferior",
+        "lousy",
+        "off",
+        "poor",
+        "punk",
+        "substandard",
+        "unacceptable",
+        "ungodly",
+        "unsatisfactory",
+        "vicious",
+        "wanting",
+        "wretched",
+        "wrong"
+        ]
+    
+    let antonymExamples =
+    [
+    "adequate",
+    "advantageous",
+    "beneficial",
+    "benevolent",
+    "choice",
+    "competent",
+    "excellent",
+    "exceptional",
+    "first-class",
+    "first-rate",
+    "good",
+    "honest",
+    "just",
+    "premium",
+    "prime",
+    "profitable",
+    "propitious",
+    "reputable",
+    "right",
+    "sincere",
+    "sufficient",
+    "superior",
+    "true",
+    "upright",
+    "virtuous",
+    "worthy"
+    ]
+    
     static let reuseID = "SynAntTableViewCell"
     
-    lazy var title = UILabel()
-    lazy var partOfSpeech = UILabel()
+    lazy var synonymTitle = UILabel()
+    lazy var antonymTitle = UILabel()
+    
+    lazy var synonyms = UILabel()
+    lazy var antonyms = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,27 +117,43 @@ class SynAntTableViewCell: UITableViewCell {
     }
     
     func styling() {
-        title.translatesAutoresizingMaskIntoConstraints = false
-        title.text = "PART OF SPEECH"
-        title.font = .systemFont(ofSize: 14, weight: .bold)
+        synonymTitle.translatesAutoresizingMaskIntoConstraints = false
+        synonymTitle.text = "SYNONYMS"
+        synonymTitle.font = .systemFont(ofSize: 16, weight: .bold)
         
-        partOfSpeech.translatesAutoresizingMaskIntoConstraints = false
-        partOfSpeech.text = "jazz"
-        partOfSpeech.numberOfLines = 0
+        antonymTitle.translatesAutoresizingMaskIntoConstraints = false
+        antonymTitle.text = "ANTONYMS"
+        antonymTitle.font = .systemFont(ofSize: 16, weight: .bold)
+        
+        synonyms.translatesAutoresizingMaskIntoConstraints = false
+        synonyms.text = synonymExamples.joined(separator: "\n")
+        synonyms.numberOfLines = 0
+        
+        antonyms.translatesAutoresizingMaskIntoConstraints = false
+        antonyms.text = antonymExamples.joined(separator: "\n")
+        antonyms.numberOfLines = 0
         
     }
     
     func layout() {
-        contentView.addSubview(title)
-        contentView.addSubview(partOfSpeech)
+        contentView.addSubview(synonymTitle)
+        contentView.addSubview(antonymTitle)
+        contentView.addSubview(synonyms)
+        contentView.addSubview(antonyms)
         
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: 1),
-            title.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1),
+            synonymTitle.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: 1),
+            synonymTitle.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1),
             
-            partOfSpeech.topAnchor.constraint(equalToSystemSpacingBelow: title.bottomAnchor, multiplier: 2),
-            partOfSpeech.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1),
-            contentView.bottomAnchor.constraint(equalToSystemSpacingBelow: partOfSpeech.bottomAnchor, multiplier: 1)
+            antonymTitle.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: 1),
+            contentView.trailingAnchor.constraint(equalToSystemSpacingAfter: antonymTitle.trailingAnchor, multiplier: 6),
+            
+            synonyms.topAnchor.constraint(equalToSystemSpacingBelow: synonymTitle.bottomAnchor, multiplier: 2),
+            synonyms.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1),
+            contentView.bottomAnchor.constraint(equalToSystemSpacingBelow: synonyms.bottomAnchor, multiplier: 1),
+            
+            antonyms.topAnchor.constraint(equalToSystemSpacingBelow: antonymTitle.bottomAnchor, multiplier: 2),
+            antonyms.leadingAnchor.constraint(equalToSystemSpacingAfter: antonymTitle.leadingAnchor, multiplier: 0)
             
         ])
     }
