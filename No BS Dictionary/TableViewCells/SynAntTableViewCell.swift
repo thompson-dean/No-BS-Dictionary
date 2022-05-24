@@ -102,8 +102,18 @@ class SynAntTableViewCell: UITableViewCell {
     lazy var synonymTitle = UILabel()
     lazy var antonymTitle = UILabel()
     
+    let synStackView = UIStackView()
+    
     lazy var synonyms = UILabel()
     lazy var antonyms = UILabel()
+    
+    let synonymButtons: [UIButton] = synonymExamples.map {
+        let button = UIButton()
+        button.setTitle($0, for: .normal)
+        return button
+    }
+   
+
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -125,6 +135,9 @@ class SynAntTableViewCell: UITableViewCell {
         antonymTitle.text = "ANTONYMS"
         antonymTitle.font = .systemFont(ofSize: 16, weight: .bold)
         
+        synStackView.translatesAutoresizingMaskIntoConstraints = false
+        synStackView.axis = .vertical
+        
         synonyms.translatesAutoresizingMaskIntoConstraints = false
         synonyms.text = synonymExamples.joined(separator: "\n")
         synonyms.numberOfLines = 0
@@ -136,9 +149,18 @@ class SynAntTableViewCell: UITableViewCell {
     }
     
     func layout() {
+        
+        let synonymButtons: [UIButton] = synonymExamples.map {
+            let button = UIButton()
+            button.setTitle($0, for: .normal)
+            return button
+        }
+        
         contentView.addSubview(synonymTitle)
         contentView.addSubview(antonymTitle)
-        contentView.addSubview(synonyms)
+        
+        synonymButtons.forEach { synStackView.addArrangedSubview($0) }
+        contentView.addSubview(synStackView)
         contentView.addSubview(antonyms)
         
         NSLayoutConstraint.activate([
@@ -148,9 +170,9 @@ class SynAntTableViewCell: UITableViewCell {
             antonymTitle.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: 1),
             contentView.trailingAnchor.constraint(equalToSystemSpacingAfter: antonymTitle.trailingAnchor, multiplier: 6),
             
-            synonyms.topAnchor.constraint(equalToSystemSpacingBelow: synonymTitle.bottomAnchor, multiplier: 2),
-            synonyms.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1),
-            contentView.bottomAnchor.constraint(equalToSystemSpacingBelow: synonyms.bottomAnchor, multiplier: 1),
+            synStackView.topAnchor.constraint(equalToSystemSpacingBelow: synonymTitle.bottomAnchor, multiplier: 2),
+            synStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1),
+            contentView.bottomAnchor.constraint(equalToSystemSpacingBelow: synStackView.bottomAnchor, multiplier: 1),
             
             antonyms.topAnchor.constraint(equalToSystemSpacingBelow: antonymTitle.bottomAnchor, multiplier: 2),
             antonyms.leadingAnchor.constraint(equalToSystemSpacingAfter: antonymTitle.leadingAnchor, multiplier: 0)

@@ -66,8 +66,4 @@ class DefinitionTableViewCell: UITableViewCell {
             
         ])
     }
-    
-   
-    
-    
 }
