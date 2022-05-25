@@ -77,8 +77,7 @@ extension WordViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableView.automaticDimension
-        
-        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+    
     
     }
     
@@ -184,8 +183,19 @@ extension WordViewController {
                     self.searchWords = wordUnits
                     self.word.text = self.searchWords[0].word
                     self.meanings = wordUnits[0].meanings
-                    self.phoneticsButton.setTitle(self.searchWords[0].phonetics[0].text, for: .normal)
+                    self.phoneticsButton.setTitle(self.searchWords[0].phonetics[0].text ?? "    ", for: .normal)
                     self.tableView.reloadData()
+                    
+//                    let phoneticLabels: [UILabel] = wordUnits[0].phonetics.map {
+//                        let label = UILabel()
+//                        label.text = $0.text ?? ""
+//                        return label
+//                    }
+//
+//                    phoneticLabels.forEach {
+//                        self.phoneticsStackView.addArrangedSubview($0)
+//                    }
+                    
                 
                 case .failure(let error):
                     print(error.localizedDescription)

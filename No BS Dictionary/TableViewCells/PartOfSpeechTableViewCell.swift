@@ -121,7 +121,7 @@ class PartOfSpeechTableViewCell: UITableViewCell {
         
         partOfSpeechlabel.translatesAutoresizingMaskIntoConstraints = false
         partOfSpeechlabel.text = "PART OF SPEECH"
-        partOfSpeechlabel.font = .systemFont(ofSize: 16, weight: .bold)
+        partOfSpeechlabel.font = .systemFont(ofSize: 18, weight: .bold)
         
         partOfSpeechType.translatesAutoresizingMaskIntoConstraints = false
         partOfSpeechType.text = "noun"
@@ -131,8 +131,8 @@ class PartOfSpeechTableViewCell: UITableViewCell {
         definitionStackView.spacing = 12
         
         definitionTitle.translatesAutoresizingMaskIntoConstraints = false
-        definitionTitle.text = "DEFINITION"
-        definitionTitle.font = .systemFont(ofSize: 16, weight: .bold)
+        definitionTitle.text = "DEFINITIONS"
+        definitionTitle.font = .systemFont(ofSize: 18, weight: .bold)
         
         definition.translatesAutoresizingMaskIntoConstraints = false
         definition.numberOfLines = 0
@@ -155,7 +155,7 @@ class PartOfSpeechTableViewCell: UITableViewCell {
         
         synTitle.translatesAutoresizingMaskIntoConstraints = false
         synTitle.text = "SYNONYMS"
-        synTitle.font = .systemFont(ofSize: 16, weight: .bold)
+        synTitle.font = .systemFont(ofSize: 18, weight: .bold)
         
         synStackView.translatesAutoresizingMaskIntoConstraints = false
         synStackView.axis = .vertical
@@ -164,7 +164,7 @@ class PartOfSpeechTableViewCell: UITableViewCell {
         
         antTitle.translatesAutoresizingMaskIntoConstraints = false
         antTitle.text = "ANTONYMS"
-        antTitle.font = .systemFont(ofSize: 16, weight: .bold)
+        antTitle.font = .systemFont(ofSize: 18, weight: .bold)
         
         antStackView.translatesAutoresizingMaskIntoConstraints = false
         antStackView.axis = .vertical
