@@ -86,16 +86,22 @@ class PartOfSpeechTableViewCell: UITableViewCell {
     
     let synAntHorizontalStackView = UIStackView()
     
+    let synAntTitleStackView = UIStackView()
+    
     let synTitle = UILabel()
     let synStackView = UIStackView()
     
     let antTitle = UILabel()
     let antStackView = UIStackView()
     
+    let emptyView = UIView()
+    let emptyView1 = UIView()
+    let emptyView2 = UIView()
+    let emptyView3 = UIView()
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         
         styling()
         layout()
@@ -122,7 +128,7 @@ class PartOfSpeechTableViewCell: UITableViewCell {
         
         definitionStackView.translatesAutoresizingMaskIntoConstraints = false
         definitionStackView.axis =  .vertical
-        definitionStackView.spacing = 8
+        definitionStackView.spacing = 12
         
         definitionTitle.translatesAutoresizingMaskIntoConstraints = false
         definitionTitle.text = "DEFINITION"
@@ -130,27 +136,45 @@ class PartOfSpeechTableViewCell: UITableViewCell {
         
         definition.translatesAutoresizingMaskIntoConstraints = false
         definition.numberOfLines = 0
-        definition.text = "Unfavorable; negative; not good. Unfavorable; negative; not good. Unfavorable; negative; not good. Unfavorable; negative; not good."
+        definition.text = ""
         definition.font = .preferredFont(forTextStyle: .subheadline)
         
         example.translatesAutoresizingMaskIntoConstraints = false
-        example.text = "Abducting children is bad for mothers. Abducting children is bad for mothers."
+        example.text = ""
         example.numberOfLines = 0
         example.font = .italicSystemFont(ofSize: 14)
         
         synAntHorizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         synAntHorizontalStackView.axis = .horizontal
         synAntHorizontalStackView.spacing = 16
+        synAntHorizontalStackView.alignment = .top
+        
+        synAntTitleStackView.translatesAutoresizingMaskIntoConstraints = false
+        synAntTitleStackView.axis = .horizontal
+        synAntTitleStackView.spacing = 16
         
         synTitle.translatesAutoresizingMaskIntoConstraints = false
         synTitle.text = "SYNONYMS"
         synTitle.font = .systemFont(ofSize: 16, weight: .bold)
         
+        synStackView.translatesAutoresizingMaskIntoConstraints = false
+        synStackView.axis = .vertical
+        synStackView.alignment = .leading
+        synStackView.spacing = -8
         
         antTitle.translatesAutoresizingMaskIntoConstraints = false
-        antTitle.text = "SYNONYMS"
+        antTitle.text = "ANTONYMS"
         antTitle.font = .systemFont(ofSize: 16, weight: .bold)
         
+        antStackView.translatesAutoresizingMaskIntoConstraints = false
+        antStackView.axis = .vertical
+        antStackView.alignment = .leading
+        antStackView.spacing = -8
+        
+        emptyView.translatesAutoresizingMaskIntoConstraints = false
+        emptyView1.translatesAutoresizingMaskIntoConstraints = false
+        emptyView2.translatesAutoresizingMaskIntoConstraints = false
+        emptyView3.translatesAutoresizingMaskIntoConstraints = false
         
         
         
@@ -158,24 +182,50 @@ class PartOfSpeechTableViewCell: UITableViewCell {
     }
     
     func layout() {
+        let synonymButtons: [UIButton] = synonymExamples.map {
+            let button = UIButton()
+            button.setTitle($0, for: .normal)
+            button.setTitleColor(.link, for: .normal)
+            return button
+        }
         
+        let antonymButtons: [UIButton] = antonymExamples.map {
+            let button = UIButton()
+            button.setTitle($0, for: .normal)
+            button.setTitleColor(.link, for: .normal)
+            return button
+        }
         
         
         mainStackView.addArrangedSubview(partOfSpeechlabel)
         mainStackView.addArrangedSubview(partOfSpeechType)
         mainStackView.addArrangedSubview(definitionTitle)
         
-        definitionStackView.addArrangedSubview(definition)
-        definitionStackView.addArrangedSubview(example)
+//        definitionStackView.addArrangedSubview(definition)
+//        definitionStackView.addArrangedSubview(example)
         
         mainStackView.addArrangedSubview(definitionStackView)
         
+        synAntTitleStackView.addArrangedSubview(synTitle)
+        synAntTitleStackView.addArrangedSubview(emptyView2)
+        synAntTitleStackView.addArrangedSubview(antTitle)
+        synAntTitleStackView.addArrangedSubview(emptyView3)
+        mainStackView.addArrangedSubview(synAntTitleStackView)
         
         
+//        synonymButtons.forEach {
+//            synStackView.addArrangedSubview($0)
+//        }
         synAntHorizontalStackView.addArrangedSubview(synStackView)
         
         
+//        antonymButtons.forEach {
+//            antStackView.addArrangedSubview($0)
+//        }
+        
+        synAntHorizontalStackView.addArrangedSubview(emptyView)
         synAntHorizontalStackView.addArrangedSubview(antStackView)
+        synAntHorizontalStackView.addArrangedSubview(emptyView1)
         
         mainStackView.addArrangedSubview(synAntHorizontalStackView)
 
@@ -188,5 +238,9 @@ class PartOfSpeechTableViewCell: UITableViewCell {
             mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
             
         ])
+        
+        
+        emptyView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        emptyView2.widthAnchor.constraint(equalToConstant: 76).isActive = true
     }
 }

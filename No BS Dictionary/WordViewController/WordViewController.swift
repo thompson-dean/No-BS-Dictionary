@@ -101,8 +101,8 @@ extension WordViewController {
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: phoneticsStackView.trailingAnchor, multiplier: 2),
             
             tableView.topAnchor.constraint(equalToSystemSpacingBelow: phoneticsStackView.bottomAnchor, multiplier: 1),
-            tableView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: tableView.trailingAnchor, multiplier: 1),
+            tableView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: tableView.trailingAnchor, multiplier: 2),
             view.bottomAnchor.constraint(equalToSystemSpacingBelow: tableView.bottomAnchor, multiplier: 1)
             
         ])
@@ -125,11 +125,46 @@ extension WordViewController: UITableViewDelegate {
 //MARK: - TABLEVIEW DATA SOURCE
 extension WordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return meanings.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PartOfSpeechTableViewCell.reuseID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: PartOfSpeechTableViewCell.reuseID, for: indexPath) as! PartOfSpeechTableViewCell
+        
+        cell.partOfSpeechType.text = meanings[indexPath.row].partOfSpeech
+        
+        let definitions: [UILabel] = meanings[indexPath.row].definitions.map {
+            let label = UILabel()
+            label.text = "・\($0.definition)"
+            label.numberOfLines = 0
+            return label
+        }
+        
+        definitions.forEach {
+            cell.definitionStackView.addArrangedSubview($0)
+        }
+        
+        let synonymButtons: [UIButton] = meanings[indexPath.row].synonyms.map {
+            let button = UIButton()
+            button.setTitle($0, for: .normal)
+            button.setTitleColor(.link, for: .normal)
+            return button
+        }
+        
+        let antonymButtons: [UIButton] = meanings[indexPath.row].antonyms.map {
+            let button = UIButton()
+            button.setTitle($0, for: .normal)
+            button.setTitleColor(.link, for: .normal)
+            return button
+        }
+        
+        synonymButtons.forEach {
+            cell.synStackView.addArrangedSubview($0)
+        }
+        
+        antonymButtons.forEach {
+            cell.antStackView.addArrangedSubview($0)
+        }
         
         return cell
         
@@ -148,11 +183,10 @@ extension WordViewController {
                     
                     self.searchWords = wordUnits
                     self.word.text = self.searchWords[0].word
+                    self.meanings = wordUnits[0].meanings
                     self.phoneticsButton.setTitle(self.searchWords[0].phonetics[0].text, for: .normal)
-                    
                     self.tableView.reloadData()
-                    
-                    
+                
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
