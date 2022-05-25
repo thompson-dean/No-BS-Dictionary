@@ -68,10 +68,9 @@ extension WordViewController {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        //REGISTER CELLS
+        //Register TableViewCell
+        
         tableView.register(PartOfSpeechTableViewCell.self, forCellReuseIdentifier: PartOfSpeechTableViewCell.reuseID)
-        tableView.register(DefinitionTableViewCell.self, forCellReuseIdentifier: DefinitionTableViewCell.reuseID)
-        tableView.register(SynAntTableViewCell.self, forCellReuseIdentifier: SynAntTableViewCell.reuseID)
         
         //TableView Details
         tableView.delegate = self
@@ -126,22 +125,13 @@ extension WordViewController: UITableViewDelegate {
 //MARK: - TABLEVIEW DATA SOURCE
 extension WordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: PartOfSpeechTableViewCell.reuseID, for: indexPath)
         
-        let cell1 = tableView.dequeueReusableCell(withIdentifier: PartOfSpeechTableViewCell.reuseID, for: indexPath) as! PartOfSpeechTableViewCell
-        let cell2 = tableView.dequeueReusableCell(withIdentifier: DefinitionTableViewCell.reuseID, for: indexPath) as! DefinitionTableViewCell
-        let cell3 = tableView.dequeueReusableCell(withIdentifier: SynAntTableViewCell.reuseID, for: indexPath) as! SynAntTableViewCell
-
-        if indexPath.row == 0 {
-            return cell1
-        } else if indexPath.row == 1 {
-            return cell2
-        } else {
-            return cell3
-        }
+        return cell
         
     }
     
