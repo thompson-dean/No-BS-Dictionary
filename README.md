@@ -6,7 +6,7 @@ I created a No-BS Dictionary app where you look up words and it shows only the e
 The design is very minimal and built using UIKit(programmatic - No Nibs or Storyboards), CoreData, and MVVM.
 
 *Screenshots*
-<img src="https://github.com/thompson-dean/No-BS-Dictionary/blob/main/screenshots/screen01.png" width=18% height=18%> <img src="https://github.com/thompson-dean/No-BS-Dictionary/blob/main/screenshots/screen02.png" width=18% height=18%> 
+<img src="https://github.com/thompson-dean/No-BS-Dictionary/blob/main/screenshots/screen01.png" width=25% height=25%> <img src="https://github.com/thompson-dean/No-BS-Dictionary/blob/main/screenshots/screen02.png" width=25% height=25%> 
 
 
 *What I learnt* <br>
