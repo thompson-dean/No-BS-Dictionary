@@ -212,7 +212,7 @@ class PartOfSpeechTableViewCell: UITableViewCell {
         synAntTitleStackView.addArrangedSubview(emptyView3)
         mainStackView.addArrangedSubview(synAntTitleStackView)
         
-        
+//        
 //        synonymButtons.forEach {
 //            synStackView.addArrangedSubview($0)
 //        }
