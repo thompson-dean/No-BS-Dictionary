@@ -3,7 +3,7 @@ Minimal Dictionary App.
 
 I feel a lot of dictionary apps on the App store do too much and are hard to navigate.
 I created a No-BS Dictionary app where you look up words and it shows only the essential details: the phonetics, defintions and synonyms/antonyms. 
-The design is very minimal and built using UIKit(programmatic - No Nibs or Storyboards), CoreData, and MVVM.
+The design is very minimal and built using UIKit(programmatic - No Nibs or Storyboards), CoreData, and MVVM. The API used for definitions is the Free Dictionary API found at https://dictionaryapi.dev/
 
 *Screenshots*
 <img src="https://github.com/thompson-dean/No-BS-Dictionary/blob/main/screenshots/screen01.png" width=25% height=25%> <img src="https://github.com/thompson-dean/No-BS-Dictionary/blob/main/screenshots/screen02.png" width=25% height=25%> 
