@@ -11,67 +11,6 @@ import UIKit
 
 class PartOfSpeechTableViewCell: UITableViewCell {
     
-    let synonymExamples = [
-            "badass",
-            "evil",
-            "vicious",
-            "vile",
-            "wicked",
-            "false",
-            "spurious",
-            "unhealthful",
-            "unwholesome",
-            "faulty",
-            "inoperative",
-            "negative",
-            "unfavorable",
-            "inappropriate",
-            "unfit",
-            "hot",
-            "rubber",
-            "dire",
-            "severe",
-            "urgent",
-            "foul",
-            "malodorous",
-            "rotten",
-            "bungling",
-            "inept",
-            "repulsive",
-            "unsightly",
-            "foul"
-            ]
-    
-    let antonymExamples =
-        [
-        "adequate",
-        "advantageous",
-        "beneficial",
-        "benevolent",
-        "choice",
-        "competent",
-        "excellent",
-        "exceptional",
-        "first-class",
-        "first-rate",
-        "good",
-        "honest",
-        "just",
-        "premium",
-        "prime",
-        "profitable",
-        "propitious",
-        "reputable",
-        "right",
-        "sincere",
-        "sufficient",
-        "superior",
-        "true",
-        "upright",
-        "virtuous",
-        "worthy"
-        ]
-    
     static let reuseID = "PartOfSpeechTableViewCell"
     
     let mainStackView = UIStackView()
@@ -176,33 +115,14 @@ class PartOfSpeechTableViewCell: UITableViewCell {
         emptyView2.translatesAutoresizingMaskIntoConstraints = false
         emptyView3.translatesAutoresizingMaskIntoConstraints = false
         
-        
-        
-        
     }
     
     func layout() {
-        let synonymButtons: [UIButton] = synonymExamples.map {
-            let button = UIButton()
-            button.setTitle($0, for: .normal)
-            button.setTitleColor(.link, for: .normal)
-            return button
-        }
-        
-        let antonymButtons: [UIButton] = antonymExamples.map {
-            let button = UIButton()
-            button.setTitle($0, for: .normal)
-            button.setTitleColor(.link, for: .normal)
-            return button
-        }
-        
         
         mainStackView.addArrangedSubview(partOfSpeechlabel)
         mainStackView.addArrangedSubview(partOfSpeechType)
         mainStackView.addArrangedSubview(definitionTitle)
-        
-//        definitionStackView.addArrangedSubview(definition)
-//        definitionStackView.addArrangedSubview(example)
+
         
         mainStackView.addArrangedSubview(definitionStackView)
         
@@ -212,17 +132,9 @@ class PartOfSpeechTableViewCell: UITableViewCell {
         synAntTitleStackView.addArrangedSubview(emptyView3)
         mainStackView.addArrangedSubview(synAntTitleStackView)
         
-//        
-//        synonymButtons.forEach {
-//            synStackView.addArrangedSubview($0)
-//        }
         synAntHorizontalStackView.addArrangedSubview(synStackView)
         
-        
-//        antonymButtons.forEach {
-//            antStackView.addArrangedSubview($0)
-//        }
-        
+    
         synAntHorizontalStackView.addArrangedSubview(emptyView)
         synAntHorizontalStackView.addArrangedSubview(antStackView)
         synAntHorizontalStackView.addArrangedSubview(emptyView1)
