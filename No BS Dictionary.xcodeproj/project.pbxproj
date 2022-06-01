@@ -16,6 +16,7 @@
 		2A34CD4E282385AA00FB7B95 /* WordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A34CD4D282385AA00FB7B95 /* WordViewController.swift */; };
 		2A4EDD6028279B0F00C50CF6 /* MainViewController+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4EDD5F28279B0F00C50CF6 /* MainViewController+Networking.swift */; };
 		2A7B5FFF2826A5D300BDCF2E /* WordViewController+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7B5FFE2826A5D300BDCF2E /* WordViewController+Networking.swift */; };
+		2AABDD912847A50C005889D0 /* WordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AABDD902847A50C005889D0 /* WordViewModel.swift */; };
 		2AD65E35283E20FA00825231 /* PartOfSpeechTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD65E34283E20FA00825231 /* PartOfSpeechTableViewCell.swift */; };
 		2AE51DCC281FEDF60082EECD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE51DCB281FEDF60082EECD /* MainViewController.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +33,7 @@
 		2A34CD4D282385AA00FB7B95 /* WordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewController.swift; sourceTree = "<group>"; };
 		2A4EDD5F28279B0F00C50CF6 /* MainViewController+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Networking.swift"; sourceTree = "<group>"; };
 		2A7B5FFE2826A5D300BDCF2E /* WordViewController+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WordViewController+Networking.swift"; sourceTree = "<group>"; };
+		2AABDD902847A50C005889D0 /* WordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewModel.swift; sourceTree = "<group>"; };
 		2AD65E34283E20FA00825231 /* PartOfSpeechTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartOfSpeechTableViewCell.swift; sourceTree = "<group>"; };
 		2AE51DCB281FEDF60082EECD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,6 +68,7 @@
 		2A19EA7727EAF3C800022EFE /* No BS Dictionary */ = {
 			isa = PBXGroup;
 			children = (
+				2AABDD8F2847A4F8005889D0 /* ViewModel */,
 				2AAE73E42827E2CA008050B9 /* Extensions */,
 				2AAE73E62827E301008050B9 /* Model */,
 				2A4EDD6128279B1300C50CF6 /* MainViewController */,
@@ -96,6 +99,14 @@
 				2A7B5FFE2826A5D300BDCF2E /* WordViewController+Networking.swift */,
 			);
 			path = WordViewController;
+			sourceTree = "<group>";
+		};
+		2AABDD8F2847A4F8005889D0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2AABDD902847A50C005889D0 /* WordViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		2AAE73E42827E2CA008050B9 /* Extensions */ = {
@@ -193,6 +204,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AABDD912847A50C005889D0 /* WordViewModel.swift in Sources */,
 				2A19EA7927EAF3C800022EFE /* AppDelegate.swift in Sources */,
 				2AD65E35283E20FA00825231 /* PartOfSpeechTableViewCell.swift in Sources */,
 				2A19EA9927EDAC4500022EFE /* Bundle.swift in Sources */,
