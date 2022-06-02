@@ -11,6 +11,7 @@ enum NetworkError: Error {
     case serverError
     case decodingError
 }
+
 extension WordViewController {
     
     func fetchWordUnits(forWord word: String, completion: @escaping (Result<[WordUnit],NetworkError>) -> Void) {
