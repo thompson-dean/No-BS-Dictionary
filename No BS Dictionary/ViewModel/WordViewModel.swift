@@ -8,6 +8,6 @@
 import Foundation
 
 struct WordViewModel {
-    
+    // add view model!
     
 }
